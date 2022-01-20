@@ -63,25 +63,70 @@ void walkP1P2(){
 }
 }
 
-void chooseplayer(){
+void roleP2(int &P1){
     do{
     system("cls");
 	cout<<" -------------------------- \n"; 
-	cout<<" |       choose role      | \n"; 
+	cout<<" |   Your role is" ;
+	if(P1 == 1)cout << " Finder  |\n";
+	else cout << " Survival|\n"; 
 	cout<<" --------------------------\n";
+	cout<<"1. Next \n";
+	cout<<"2. Quit \n";
+	cout<<"Select option: ";
+	char option = getche();
+	if( option=='1') break;
+	else if( option=='2') break;
+	}
+    while(1);
+}
+
+void chooseroleP1(){
+    do{
+    system("cls");
+	cout<<" --------------------------- \n"; 
+	cout<<" |     choose role P1      | \n"; 
+	cout<<" ---------------------------\n";
+	if( P1==0){
 	cout<<"1. survival \n";
-	cout<<"2. Finder \n";	 
+	cout<<"2. Finder \n";
 	cout<<"3. back \n";
 	cout<<"Select option: ";
 	char option = getche();
 		
-	if( option=='1') cout << "1";
-	else if( option=='2') cout << "2";
+	if( option=='1') P1=1;
+	else if( option=='2') P1=2;
 	else if( option=='3') return;	
-    }
+	}
+	if( P1==1){
+	system("cls");
+	cout<<" --------------------------- \n"; 
+	cout<<" | Select Survival SureP1? | \n"; 
+	cout<<" ---------------------------\n";
+	cout<<"1. Yes \n";	 
+	cout<<"2. No \n";
+	cout<<"Select option: ";
+	char option = getche();
+		
+	if( option=='1') roleP2(P1);
+	else if( option=='2') P1=0;		
+	}
+	if( P1==2){
+	system("cls");
+	cout<<" --------------------------- \n"; 
+	cout<<" |  Select Finder SureP1?  | \n"; 
+	cout<<" ---------------------------\n";
+	cout<<"1. Yes \n";	 
+	cout<<"2. No \n";
+	cout<<"Select option: ";
+	char option = getche();
+		
+	if( option=='1') roleP2(P1);
+	else if( option=='2') P1=0;	
+	}
+	}
     while(1);
 }
-
 void Howtoplay(){
     do{
     system("cls");
