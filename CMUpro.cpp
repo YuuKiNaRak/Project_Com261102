@@ -1,6 +1,7 @@
 #include <iostream>
 #include <conio.h>
 #include <string>
+#include <windows.h>
 using namespace std;
 
 int P1=0;
@@ -17,10 +18,12 @@ void passcode();//เดะค่อยมาทำ
 void space();//จัดหน้า อันนี้มึงทำเจดจัดให้งามๆกลางจอ
 
 int main(){
+HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 int ST=0;
 do{
 system("cls");
 cout<<" -------------------------- \n"; 
+SetConsoleTextAttribute(h,14);
 cout<<" |      LostHope Game     | \n"; 
 cout<<" --------------------------\n";
 cout<<"     1. Start Game\n";
