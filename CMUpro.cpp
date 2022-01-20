@@ -109,7 +109,18 @@ void walkPY(){
     cout<<"5. Quit(get passcodelevel)\n";
 	cout<<"Select option: ";
 	char option = getche();
-
+    if(P1=1){
+	if( option=='1') movep1 -= 10;
+	else if( option=='2') movep1 += 10;
+    else if( option=='3') movep1 -= 1 ;
+    else if( option=='4') movep1 += 1;       
+    }
+    else{
+	if( option=='1') movep2 -= 10;
+	else if( option=='2') movep2 += 10;
+    else if( option=='3') movep2 -= 1 ;
+    else if( option=='4') movep2 += 1;  
+    }
 	/*if( option=='1') checkmap();
 	else if( option=='2') checkmap();
     else if( option=='3') checkmap();
@@ -124,6 +135,10 @@ void setmap(){
 	{
 		set[i]=LV1[i];
 	}
+    movep1=2;
+    set[2]=4;
+    movep2 = 42;
+    set[42]=5;
 	walkPY();
 }
 void Howtoplay(){
