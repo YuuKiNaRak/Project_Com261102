@@ -30,6 +30,7 @@ void space(int x, int y){
 }
 
 int main(){
+HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 int ST=0;
 do{
 system("cls");
