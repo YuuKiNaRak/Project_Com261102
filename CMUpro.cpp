@@ -1,6 +1,9 @@
 #include <iostream>
 #include <conio.h>
 #include <string>
+#include <windows.h>
+#include <dos.h>
+#include <time.h> 
 using namespace std;
 
 int P1=0;
@@ -10,23 +13,33 @@ int movep2=0;
 int LV1[50]={1,2,2,1,1,1,2,2,1,1,2,1,2,2,2,2,2,2,2,1,2,2,2,1,2,1,2,2,1,1,1,2,1,1,2,1,3,2,1,1,2,2,2,1,2,2,1,2,2,1}; 
 int set[50]={};
 
+#define STD_OUTPUT_HANDLE ((DWORD)-11)
+
+HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+COORD CursorPosition;
+
+
 void setmap();
 void Howtoplay();
 void checkmap();
 void passcode();//เดะค่อยมาทำ
-void space();//จัดหน้า อันนี้มึงทำเจดจัดให้งามๆกลางจอ
+void space(int x, int y){
+	CursorPosition.X = x;
+	CursorPosition.Y = y;
+	SetConsoleCursorPosition(console, CursorPosition);
+}
 
 int main(){
 int ST=0;
 do{
 system("cls");
-cout<<" -------------------------- \n"; 
-cout<<" |      LostHope Game     | \n"; 
-cout<<" --------------------------\n";
-cout<<"     1. Start Game\n";
-cout<<"     2. How to play\n";	 
-cout<<"     3. Quit\n";
-cout<<"Select option: ";
+space(100,5); cout<<" -------------------------- \n"; 
+space(100,6); cout<<" |      LostHope Game     | \n"; 
+space(100,7); cout<<" --------------------------\n";
+space(100,9); cout<<"     1. Start Game\n";
+space(100,10); cout<<"     2. How to play\n";	 
+space(100,11); cout<<"     3. Quit\n";
+space(100,13); cout<<"Select option: ";
 char option = getche();
 if( option=='1') ST +=1;
 else if( option=='2') Howtoplay();
@@ -37,14 +50,14 @@ if(ST == 0){}
 else{
     do{
     system("cls");
-	cout<<" --------------------------- \n"; 
-	cout<<" |     choose role P1      | \n"; 
-	cout<<" ---------------------------\n";
+	space(100,5); cout<<" --------------------------- \n"; 
+	space(100,6); cout<<" |     choose role P1      | \n"; 
+	space(100,7); cout<<" ---------------------------\n";
 	if( P1==0){
-	cout<<"1. survival \n";
-	cout<<"2. Finder \n";
-	cout<<"3. Quit \n";
-	cout<<"Select option: ";
+	space(100,9); cout<<"1. survival \n";
+	space(100,10); cout<<"2. Finder \n";
+	space(100,11); cout<<"3. Quit \n";
+	space(100,13); cout<<"Select option: ";
 	char option = getche();
 		
 	if( option=='1') P1=1;
