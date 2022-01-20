@@ -10,6 +10,11 @@ using namespace std;
 #define key_left 75
 #define key_right 77
 
+int P1=0;
+int P2=0;
+int LV1[]={1,2,2,1,1,1,2,2,1,1,2,2,1,2,2,2,2,2,2,1,2,2,2,1,2,1,2,2,1,1,1,2,1,1,2,1,3,2,1,1,2,2,2,1,2,2,1,2,2,1};
+
+
 void map1(){
 	string map[]={"#####","#"};
 	for(int i=0; i<10; i++){
@@ -25,12 +30,20 @@ void map1(){
 	
 }
 
-void map2(){
-	string map[]={"#####","#"};
+void mapL1(){
+	for (int i = 0; i < 50; i++)
+	{	
+		if(i%10==0) cout << "\n";
+		
+		if(LV1[i]==1) cout << "# ";
+		else if(LV1[i]==3) cout << "* ";
+		else cout << "_ ";
+	}
+	
 }
 
 void walkP1P2(){
-    char key = getch(); //getch( )  คือ ฟังก์ชันที่ใช้รับข้อมูลเพียง  1  ตัวอักขระจากคีย์บอร์ด
+    char key = getche(); //getch( )  คือ ฟังก์ชันที่ใช้รับข้อมูลเพียง  1  ตัวอักขระจากคีย์บอร์ด
 	int value = key;
 
 	while(1){
@@ -127,6 +140,7 @@ void chooseroleP1(){
 	}
     while(1);
 }
+
 void Howtoplay(){
     do{
     system("cls");
@@ -138,7 +152,7 @@ void Howtoplay(){
 	cout<<"Select option: ";
 	char option = getche();
 		
-	if( option=='1') chooseplayer();
+	if( option=='1') chooseroleP1();
 	else if( option=='2') return;
 	else ;	
     }
@@ -157,7 +171,7 @@ int main(){
 	cout<<"Select option: ";
 	char option = getche();
 		
-	if( option=='1') chooseplayer();
+	if( option=='1') chooseroleP1();
 	else if( option=='2') Howtoplay();
 	else if( option=='3') break;	
     }
@@ -165,4 +179,3 @@ int main(){
 return 0;
 
 }
-/////////////////////////////////////////
