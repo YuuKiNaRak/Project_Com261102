@@ -13,7 +13,8 @@ int set[50]={};
 void setmap();
 void Howtoplay();
 void checkmap();
-void passcode();
+void passcode();//เดะค่อยมาทำ
+void space();//จัดหน้า อันนี้มึงทำเจดจัดให้งามๆกลางจอ
 
 int main(){
 int ST=0;
