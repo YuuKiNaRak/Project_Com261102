@@ -20,7 +20,7 @@ int set[50]={};
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 COORD CursorPosition;
 
-
+void time();
 void setmap();
 void Howtoplay();
 void checkmap(int lastmove);
@@ -176,3 +176,18 @@ void checkmap(int lastmove){
 	cout << lastmove;
 	cin >> x;
 }
+
+void time(){
+int sec = 30;
+while(true){
+
+	system("cls");
+	cout << sec << endl;
+	sec--;
+	sleep (1);
+}
+}
+
+
+
+
