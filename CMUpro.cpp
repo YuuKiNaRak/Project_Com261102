@@ -12,8 +12,7 @@ int movep1=0;//เดินตามช่องarray
 int movep2=0;//เดินตามช่องarray
 int p1turn=0;//0รอ 1กำลังเดิน -1ตาคนอื่น
 int p2turn=0;//0รอ 1กำลังเดิน -1ตาคนอื่น
-int LV0[50]={1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1};
-int LV1[50]={1,2,2,1,1,1,2,2,1,1,2,1,2,2,2,2,2,2,2,1,2,2,2,1,2,1,2,2,1,1,1,2,1,1,2,1,3,2,1,1,2,2,2,1,2,2,1,2,2,1}; 
+int LV1[50]={1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1};
 int set[50]={};
 
 #define STD_OUTPUT_HANDLE ((DWORD)-11)
@@ -37,9 +36,11 @@ HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 int ST=0;
 do{
 system("cls");
+SetConsoleTextAttribute(h,6);
 space(50,5); cout<<" -------------------------- \n"; 
 space(50,6); cout<<" |      LostHope Game     | \n"; 
 space(50,7); cout<<" --------------------------\n";
+SetConsoleTextAttribute(h,14);
 space(50,9); cout<<"  1. Start Game \n";
 space(50,10); cout<<"  2. How to play *not ready to use now* \n";	 
 space(50,11); cout<<"   3. Quit\n";
@@ -54,6 +55,7 @@ if(ST == 0){}
 else{
     do{
     system("cls");
+	SetConsoleTextAttribute(h,4);
 	space(50,5); cout<<" --------------------------- \n"; 
 	space(50,6); cout<<" |     choose role P1      | \n"; 
 	space(50,7); cout<<" ---------------------------\n";
