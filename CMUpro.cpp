@@ -6,13 +6,15 @@
 #include <time.h> 
 using namespace std;
 
+int x = 0 ;
+int y = 0 ;
 int P1=0;
 int P2=0;
 int movep1=0;//เดินตามช่องarray
 int movep2=0;//เดินตามช่องarray
 int p1turn=0;//0รอ 1กำลังเดิน -1ตาคนอื่น
 int p2turn=0;//0รอ 1กำลังเดิน -1ตาคนอื่น
-int LV1[50]={1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1};
+int LV1[50]={1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,4,2,2,1,1,2,2,2,2,3,2,2,2,1,1,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1};
 int set[50]={};
 
 #define STD_OUTPUT_HANDLE ((DWORD)-11)
@@ -21,6 +23,7 @@ HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 COORD CursorPosition;
 
 void time();
+void testhowtoplay();
 void setmap();
 void Howtoplay();
 void checkmap(int lastmove);
@@ -42,7 +45,7 @@ space(50,6); cout<<" |      LostHope Game     | \n";
 space(50,7); cout<<" --------------------------\n";
 SetConsoleTextAttribute(h,14);
 space(50,9); cout<<"  1. Start Game \n";
-space(50,10); cout<<"  2. How to play *not ready to use now* \n";	 
+space(50,10); cout<<"  2. How to play  \n";	 
 space(50,11); cout<<"   3. Quit\n";
 space(50,13); cout<<"Select option: ";
 char option = getche();
@@ -162,9 +165,11 @@ void Howtoplay(){
 	cout<<" |        (How)           | \n"; 
 	cout<<" --------------------------\n";
 	cout<<"1. Back\n";	 
+	cout << "2. start\n";
 	cout<<"Select option: ";
 	char option = getche();
-	if( option=='1') return;	
+	if( option=='1') return;
+	else if(option == '2')testhowtoplay();	
     }
     while(1);
 }
@@ -184,10 +189,22 @@ while(true){
 	system("cls");
 	cout << sec << endl;
 	sec--;
-	sleep (1);
+	Sleep (1);
 }
 }
-
+void testhowtoplay(){
+	system("cls");
+	cout<<"\n----------------\n";
+	cout<<"|   How to play  |";
+	cout<<"\n----------------";
+	cout<<"\n use 1 2 3 4 to move";
+	cout<<"\n\n Press '1' to move up";
+	cout<<"\n Press '2' to move down";
+	cout<<"\n Press '3' to move left";
+	cout<<"\n Press '4' to move right";
+	cout<<"\n\nPress any key to go back to menu";
+	getch();
+}
 
 
 
