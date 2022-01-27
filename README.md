@@ -7,7 +7,7 @@
 
 
 >YuuKiNaRak ณัฐชนน นันทศรี ซอล  (CODER[ตัวเกม])(Tester)
->bewzunjo ศรัณย์ กิมานุวัฒน์ บิว  (CODER[ตกแต่ง])(Tester)
+>bewzunjo ศรัณย์ กิมานุวัฒน์ บิว  (CODER[กราฟฟิก,ตกแต่ง])(Tester)
 >Denisska1231 เจตพล กอบกำ เจต (CODER[ตัวเกม])(Tester)
 >BezTTTT ธนกฤต จันลาเศษ เบสท์ (Present)(Tester)
->Nuttadon นัทดล ปุญญพันธุ์ ใหม่ (present)(Tester)
+>Nuttadon นัทดล ปุญญพันธุ์ ใหม่ (Present)(Tester)
