@@ -205,6 +205,15 @@ void testhowtoplay(){
 	cout<<"\n\nPress any key to go back to menu";
 	getch();
 }
+void gameover(){
+	system("cls");
+	cout<<endl;
+	cout<<"\t\t--------------------------"<<endl;
+	cout<<"\t\t-------- Game Over -------"<<endl;
+	cout<<"\t\t--------------------------"<<endl<<endl;
+	cout<<"\t\tPress any key to go back to menu.";
+	getch();
+}
 
 
 
