@@ -4,35 +4,40 @@
 #include "windows.h"
 #include <dos.h>
 #include <time.h> 
+#include<ctime>
 
 using namespace std;
 void P1mv();
+//map layout
 char map[10][200] = {
-"####################################################################################################",
-"#O    @                                                                                            #",
-"#                                                                                                  #",
-"#                                                                                                  #",
-"#            @                                                                                     #",
-"#                                                                               *                  #",
-"#                                                                                                  #",
-"#                                                                                                  #",
-"#                                                                                                  #",
-"####################################################################################################",
+"#######",
+"###*###",
+"##   ##",
+"#@@ @@#",
+"# @@@ #",
+"#@   @#",
+"# @@@ #",
+"#@ @ @#",
+"#  O  #",
+"#######",
 };
 
-int x=1;
-int y=1;//spawnpoint
-
-bool game_runner = true;
+int x=3;
+int y=8;//spawnpoint for player
+//gamerunning condition
+bool game_runner;
 
 int main(){
-    
+    //add interface and game menu here <----
+    game_runner = true;
+    //draw map
     while(game_runner == true){
     system("cls");
         for(int dp=0;dp<10;dp++){
             cout << map[dp] << endl;
         }
-    system("pause>nul");
+    system("pause>nul");//for exicute the shattering eff.
+    //controll and block interaction
         if(GetAsyncKeyState(VK_DOWN)){
             int yc = y+1;
             if(map[yc][x] == ' '){
@@ -40,7 +45,6 @@ int main(){
                 y++;
                 map[y][x] = 'O';
             }if(map[yc][x] == '*'){
-                map[y][x] = ' '; 
                 cout << "GG YOU WIN EZ GAME";
                 game_runner = false;
             }if(map[yc][x] == '@'&&map[yc+1][x] == ' '){
@@ -57,7 +61,6 @@ int main(){
                 y--;
                 map[y][x] = 'O';
             }if(map[yc][x] == '*'){
-                map[y][x] = ' '; 
                 cout << "GG YOU WIN EZ GAME";
                 game_runner = false;
             }if(map[yc][x] == '@'&&map[yc-1][x] == ' '){
@@ -74,7 +77,6 @@ int main(){
                 x++;
                 map[y][x] = 'O';
             }if(map[y][xc] == '*'){
-                map[y][x] = ' '; 
                 cout << "GG YOU WIN EZ GAME";
                 game_runner = false;
             }if(map[y][xc] == '@'&&map[y][xc+1] == ' '){
@@ -91,7 +93,6 @@ int main(){
                 x--;
                 map[y][x] = 'O';
             }if(map[y][xc] == '*'){
-                map[y][x] = ' '; 
                 cout << "GG YOU WIN EZ GAME";
                 game_runner = false;
             }if(map[y][xc] == '@'&&map[y][xc-1] == ' '){
@@ -101,6 +102,7 @@ int main(){
                 map[y][x-1] = '@';
             }
         }
+       
     }
     
     return 0;
