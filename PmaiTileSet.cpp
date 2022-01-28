@@ -30,6 +30,8 @@ bool game_runner;
 int main(){
     //add interface and game menu here <----
     game_runner = true;
+    int count = 19;
+    char ch;
     //draw map
     while(game_runner == true){
     system("cls");
@@ -44,14 +46,19 @@ int main(){
                 map[y][x] = ' '; 
                 y++;
                 map[y][x] = 'O';
+                count--;
             }if(map[yc][x] == '*'){
-                cout << "GG YOU WIN EZ GAME";
+                cout << "GG YOU WIN EZ GAME\n";
                 game_runner = false;
             }if(map[yc][x] == '@'&&map[yc+1][x] == ' '){
                 map[y][x] = ' ';
                 y++;
                 map[y][x] = 'O';
                 map[y+1][x] = '@';
+                count--;
+            }if(count == 0){
+                game_runner = false;
+                cout << "GAME OVER\n";
             }
         }
         if(GetAsyncKeyState(VK_UP)){
@@ -60,14 +67,19 @@ int main(){
                 map[y][x] = ' '; 
                 y--;
                 map[y][x] = 'O';
+                count--;
             }if(map[yc][x] == '*'){
-                cout << "GG YOU WIN EZ GAME";
+                cout << "GG YOU WIN EZ GAME\n";
                 game_runner = false;
             }if(map[yc][x] == '@'&&map[yc-1][x] == ' '){
                 map[y][x] = ' ';
                 y--;
                 map[y][x] = 'O';
                 map[y-1][x] = '@';
+                count--;
+            }if(count == 0){
+                game_runner = false;
+                cout << "GAME OVER\n";
             }
         }
         if(GetAsyncKeyState(VK_RIGHT)){
@@ -76,14 +88,19 @@ int main(){
                 map[y][x] = ' '; 
                 x++;
                 map[y][x] = 'O';
+                count--;
             }if(map[y][xc] == '*'){
-                cout << "GG YOU WIN EZ GAME";
+                cout << "GG YOU WIN EZ GAME\n";
                 game_runner = false;
             }if(map[y][xc] == '@'&&map[y][xc+1] == ' '){
                 map[y][x] = ' ';
                 x++;
                 map[y][x] = 'O';
                 map[y][x+1] = '@';
+                count--;
+            }if(count == 0){
+                game_runner = false;
+                cout << "GAME OVER\n";
             }
         }
         if(GetAsyncKeyState(VK_LEFT)){
@@ -92,20 +109,22 @@ int main(){
                 map[y][x] = ' '; 
                 x--;
                 map[y][x] = 'O';
+                count--;
             }if(map[y][xc] == '*'){
-                cout << "GG YOU WIN EZ GAME";
+                cout << "GG YOU WIN EZ GAME\n";
                 game_runner = false;
             }if(map[y][xc] == '@'&&map[y][xc-1] == ' '){
                 map[y][x] = ' ';
                 x--;
                 map[y][x] = 'O';
                 map[y][x-1] = '@';
+                count--;
+            }if(count == 0){
+                game_runner = false;
+                cout << "GAME OVER\n";
             }
         }
-       
     }
-    
     return 0;
 }
-
 
