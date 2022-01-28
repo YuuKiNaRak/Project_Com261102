@@ -44,9 +44,9 @@ space(50,5); cout<<" -------------------------- \n";
 space(50,6); cout<<" |      LostHope Game     | \n"; 
 space(50,7); cout<<" --------------------------\n";
 SetConsoleTextAttribute(h,14);
-space(50,9); cout<<"  1. Start Game \n";
+space(50,9);  cout<<"  1. Start Game \n";
 space(50,10); cout<<"  2. How to play  \n";	 
-space(50,11); cout<<"   3. Quit\n";
+space(50,11); cout<<"  3. Quit\n";
 space(50,13); cout<<"Select option: ";
 char option = getche();
 if( option=='1') ST +=1;
@@ -63,7 +63,7 @@ else{
 	space(50,6); cout<<" |     choose role P1      | \n"; 
 	space(50,7); cout<<" ---------------------------\n";
 	if( P1==0){
-	space(50,9); cout<<"1. survival \n";
+	space(50,9);  cout<<"1. Survival \n";
 	space(50,10); cout<<"2. Finder \n";
 	space(50,11); cout<<"3. Quit \n";
 	space(50,13); cout<<"Select option: ";
@@ -78,13 +78,13 @@ else{
 	/////////////////////////////////////
     do{
     system("cls");
-	cout<<" -------------------------- \n"; 
-	if(P1 == 1)cout << " |   P2 role is Finder  |\n";
+	space(50,5); cout<<" -------------------------- \n"; 
+	space(50,6); if(P1 == 1)cout << " |   P2 role is Finder  |\n";
 	else cout << " |   P2 role is Survival|\n"; 
-	cout<<" --------------------------\n";
-	cout<<"1. Next \n";
-	cout<<"2. Quit \n";
-	cout<<"Select option: ";
+	space(50,7); cout<<" --------------------------\n";
+	space(50,9); cout<<"1. Next \n";
+	space(50,10);cout<<"2. Quit \n";
+	space(50,13);cout<<"Select option: ";
 	char option = getche();
 	if(P1 == 1)P2=2;
 	else P2=1; 
@@ -97,9 +97,8 @@ else{
 void walkPY(){
 	system("cls");
 	for (int i = 0; i < 50; i++)
-	{	
+	{	space(50,1);
 		if(i%10==0) cout << "\n";
-		
 		if(set[i]==1) cout << "# ";
 		else if(set[i]==3) cout << "* ";
 		else if(set[i]==4) cout << "1 ";
@@ -108,17 +107,17 @@ void walkPY(){
 	}
     cout << "\n";
     do{
-	cout<<" -------------------------- \n";
-	if(P1 == 1 and movep1 == 0)cout<<" |  Use WASD to move P1   | \n"; 
+	space(50,7); cout<<" -------------------------- \n";
+	space(50,8); if(P1 == 1 and movep1 == 0)cout<<" |  Use WASD to move P1   | \n"; 
 	else cout<<" |  Use WASD to move P2   | \n"; 
-	cout<<" |     Use WASD to move   | \n"; 
-	cout<<" --------------------------\n";
-	cout<<"1. W(up) ";
+	space(50,9); cout<<" |     Use WASD to move   | \n"; 
+	space(50,10); cout<<" --------------------------\n";
+	space(50,11); cout<<"1. W(up) ";
 	cout<<"         2. S(Down) \n";
-	cout<<"3. A(lelf) ";
+	space(50,12); cout<<"3. A(lelf) ";
 	cout<<"       4. D(right) \n";
-    cout<<"5. Quit(get passcodelevel) *not ready to use now*\n";
-	cout<<"Select option: ";
+    space(50,13); cout<<"5. Quit(get passcodelevel) *not ready to use now*\n";
+	space(50,15); cout<<"Select option: ";
 	char option = getche();
 	/////////////////////////////////////
 	if(P1 == 1){//เพิ่มเลขเดิน
