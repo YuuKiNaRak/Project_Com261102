@@ -97,8 +97,11 @@ else{
 void walkPY(){
 	system("cls");
 	for (int i = 0; i < 50; i++)
-	{	space(50,1);
-		if(i%10==0) cout << "\n";
+	{	
+		if(i%10==0){
+		cout << "\n";
+		for (int y = 0; y < 55; y++){ cout << " ";}
+		}
 		if(set[i]==1) cout << "# ";
 		else if(set[i]==3) cout << "* ";
 		else if(set[i]==4) cout << "1 ";
