@@ -374,7 +374,7 @@ void Howtoplay(){
 	cout<<"\n----------------\n";
 	cout<<"|   How to play  |";
 	cout<<"\n----------------";
-	cout<<"\n use 1 2 3 4 to move";
+	cout<<"\n use W A S D to move";
 	cout<<"\n\n Press 'w' to move up";
 	cout<<"\n Press 's' to move down";
 	cout<<"\n Press 'a' to move left";
@@ -383,18 +383,31 @@ void Howtoplay(){
 	getch();
 }
 void gameover(){
+    if(turn ==1){
 	system("cls");
 	cout<<endl;
-	space(50,5);cout<<"\t\t--------------------------"<<endl;
-	space(50,6);cout<<"\t\t-------- Game Over -------"<<endl;
-	space(50,7);cout<<"\t\t--------------------------"<<endl<<endl;
+	space(50,5);cout<<"\t\t------------------------------"<<endl;
+	space(50,6);cout<<"\t\t-------- Player 1 wins -------"<<endl;
+	space(50,7);cout<<"\t\t------------------------------"<<endl<<endl;
 	space(47,8);cout<<"\t\tPress any key to go back to menu.";
     P1=0;
     P2=0;
     turn=0;
     getche();
     menu();
-
+    }else if (turn ==2){
+        system("cls");
+	    cout<<endl;
+	    space(50,5);cout<<"\t\t------------------------------"<<endl;
+	    space(50,6);cout<<"\t\t-------- Player 2 wins -------"<<endl;
+	    space(50,7);cout<<"\t\t------------------------------"<<endl<<endl;
+	    space(47,8);cout<<"\t\tPress any key to go back to menu.";
+        P1=0;
+        P2=0;
+        turn=0;
+        getche();
+        menu();
+    }
 }
 void gamestart(){
     for(int r=0;r<5;r++){
