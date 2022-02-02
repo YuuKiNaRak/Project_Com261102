@@ -47,7 +47,7 @@ return 0;
 }
 void p1(){
     if(turn==1){
-        if(GetAsyncKeyState(VK_DOWN)){
+        if(GetAsyncKeyState(0x53)){
             int yc = y+1;
             if(map[yc][x] == '_'){
                 map[y][x] = '_'; 
@@ -69,7 +69,7 @@ void p1(){
             Sleep(200);
             return;
         }
-        if(GetAsyncKeyState(VK_UP)){
+        if(GetAsyncKeyState(0x57)){
             int yc = y-1;
             if(map[yc][x] == '_'){
                 map[y][x] = '_'; 
@@ -93,7 +93,7 @@ void p1(){
             Sleep(200);
             return;
         }
-        if(GetAsyncKeyState(VK_RIGHT)){
+        if(GetAsyncKeyState(0x44)){
             int xc = x+2;
             if(map[y][xc] == '_'){
                 map[y][x] = '_'; 
@@ -117,7 +117,7 @@ void p1(){
             Sleep(200);
             return;
         }
-        if(GetAsyncKeyState(VK_LEFT)){
+        if(GetAsyncKeyState(0x41)){
             int xc = x-2;
             if(map[y][xc] == '_'){
                 map[y][x] = '_'; 
@@ -144,7 +144,7 @@ void p1(){
 }
 void p2(){
 if(turn==2){
-        if(GetAsyncKeyState(VK_DOWN)){
+        if(GetAsyncKeyState(0x53)){
             int jc = j+1;
             if(map[jc][i] == '_'){
                 map[j][i] = '_'; 
@@ -167,7 +167,7 @@ if(turn==2){
             Sleep(200);
             return;
         }
-        if(GetAsyncKeyState(VK_UP)){
+        if(GetAsyncKeyState(0x57)){
             int jc = j-1;
             if(map[jc][i] == '_'){
                 map[j][i] = '_'; 
@@ -191,7 +191,7 @@ if(turn==2){
             Sleep(200);
             return;
         }
-        if(GetAsyncKeyState(VK_RIGHT)){
+        if(GetAsyncKeyState(0x44)){
             int ic = i+2;
             if(map[j][ic] == '_'){
                 map[j][i] = '_'; 
@@ -215,7 +215,7 @@ if(turn==2){
             Sleep(200);
             return;
         }
-        if(GetAsyncKeyState(VK_LEFT)){
+        if(GetAsyncKeyState(0x41)){
             int ic = i-2;
             if(map[j][ic] == '_'){
                 map[j][i] = '_'; 
@@ -245,10 +245,10 @@ void Howtoplay(){
 	cout<<"|   How to play  |";
 	cout<<"\n----------------";
 	cout<<"\n use 1 2 3 4 to move";
-	cout<<"\n\n Press '1' to move up";
-	cout<<"\n Press '2' to move down";
-	cout<<"\n Press '3' to move left";
-	cout<<"\n Press '4' to move right";
+	cout<<"\n\n Press 'w' to move up";
+	cout<<"\n Press 's' to move down";
+	cout<<"\n Press 'a' to move left";
+	cout<<"\n Press 'd' to move right";
 	cout<<"\n\nPress any key to go back to menu";
 	getch();
 }
