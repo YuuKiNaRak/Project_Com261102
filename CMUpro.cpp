@@ -36,12 +36,34 @@ void space(int x, int y){
 }
 
 int main(){
+	int randomcolor;
+	srand(time(0));
+	int a[randomcolor] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
+	int len = 0,x;
+    string text;
+	len = text.length();
+	
+	
+	
 HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 int ST=0;
 do{
 system("cls");
-SetConsoleTextAttribute(h,6);
-space(50,5); cout<<" -------------------------- \n"; 
+
+	
+	space(50,5);
+	string text = " -------------------------- \n";
+    len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];
+		//Sleep(250);
+    }
+
+	
+	
+	
 space(50,6); cout<<" |      LostHope Game     | \n"; 
 space(50,7); cout<<" --------------------------\n";
 SetConsoleTextAttribute(h,14);
@@ -98,6 +120,8 @@ else{
 	}while(P1 >0 and P2>0);
 }
 }
+
+
 void walkPY(){
 	do{
 	int lastmove=0;//บันทึกการเดิน (เผื่อมันเดินติด)
@@ -234,5 +258,3 @@ void gameover(){
 	getch();
 }
  
-
-
