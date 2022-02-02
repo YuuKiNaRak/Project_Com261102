@@ -36,6 +36,7 @@ char mapset[5][20] = {
 "_ _ _ # _ _ # _ 1 #"};
 char map[5][20];
 int x,y,i,j;
+int times=60;
 //spawnpoint
 int turn=0,P1=0,P2=0;
 bool game_runner = true;
@@ -46,7 +47,7 @@ menu();
 return 0; 
 }
 void p1(){
-    if(turn==1){
+      if(turn==1&&P1==1){
         if(GetAsyncKeyState(0x53)){
             int yc = y+1;
             if(map[yc][x] == '_'){
@@ -57,8 +58,6 @@ void p1(){
                 map[y][x] = '_';
                 y++; 
                 map[y][x] = '1';
-                Sleep(100);
-                gameover();
             }if(map[yc][x] == '@'&&map[yc+1][x] == '_'){
                 map[y][x] = '_';
                 y++;
@@ -80,8 +79,6 @@ void p1(){
                 map[y][x] = '_'; 
                 y--;
                 map[y][x] = '1';
-                Sleep(100);
-                gameover();
             }if(map[yc][x] == '@'&&map[yc-1][x] == '_'){
                 map[y][x] = '_';
                 y--;
@@ -104,8 +101,6 @@ void p1(){
                 map[y][x] = '_'; 
                 x+=2;
                 map[y][x] = '1';
-                Sleep(100);
-                gameover();
             }if(map[y][xc] == '@'&&map[y][xc+2] == '_'){
                 map[y][x] = '_';
                 x+=2;
@@ -127,8 +122,77 @@ void p1(){
                 map[y][x] = '_'; 
                 x-=2;
                 map[y][x] = '1';
-                Sleep(100);
-                gameover();
+                }if(map[y][xc] == '@'&&map[y][xc-2] == '_'){
+                map[y][x] = '_';
+                x-=2;
+                map[y][x] = '1';
+                map[y][x-2] = '@';
+
+            }
+            turn=2;
+            Sleep(200);
+            return;
+        }
+    }
+    if(turn==1&&P1==2){
+        if(GetAsyncKeyState(0x53)){
+            int yc = y+1;
+            if(map[yc][x] == '_'){
+                map[y][x] = '_'; 
+                y++;
+                map[y][x] = '1';
+            }if(map[yc][x] == '@'&&map[yc+1][x] == '_'){
+                map[y][x] = '_';
+                y++;
+                map[y][x] = '1';
+                map[y+1][x] = '@';
+            }
+            turn=2;
+            Sleep(200);
+            return;
+        }
+        if(GetAsyncKeyState(0x57)){
+            int yc = y-1;
+            if(map[yc][x] == '_'){
+                map[y][x] = '_'; 
+                y--;
+                map[y][x] = '1';
+
+            }if(map[yc][x] == '@'&&map[yc-1][x] == '_'){
+                map[y][x] = '_';
+                y--;
+                map[y][x] = '1';
+                map[y-1][x] = '@';
+
+            }
+            turn=2;
+            Sleep(200);
+            return;
+        }
+        if(GetAsyncKeyState(0x44)){
+            int xc = x+2;
+            if(map[y][xc] == '_'){
+                map[y][x] = '_'; 
+                x+=2;
+                map[y][x] = '1';
+
+            }if(map[y][xc] == '@'&&map[y][xc+2] == '_'){
+                map[y][x] = '_';
+                x+=2;
+                map[y][x] = '1';
+                map[y][x+2] = '@';
+
+            }
+            turn=2;
+            Sleep(200);
+            return;
+        }
+        if(GetAsyncKeyState(0x41)){
+            int xc = x-2;
+            if(map[y][xc] == '_'){
+                map[y][x] = '_'; 
+                x-=2;
+                map[y][x] = '1';
                 }if(map[y][xc] == '@'&&map[y][xc-2] == '_'){
                 map[y][x] = '_';
                 x-=2;
@@ -143,7 +207,7 @@ void p1(){
     }
 }
 void p2(){
-if(turn==2){
+if(turn==2&&P2==1){
         if(GetAsyncKeyState(0x53)){
             int jc = j+1;
             if(map[jc][i] == '_'){
@@ -154,8 +218,6 @@ if(turn==2){
                 map[j][i] = '_'; 
                 j++;
                 map[j][i] = '2';
-                Sleep(100);
-                gameover();
             }if(map[jc][i] == '@'&&map[jc+1][i] == '_'){
                 map[j][i] = '_';
                 j++;
@@ -178,8 +240,6 @@ if(turn==2){
                 map[j][i] = '_';
                 j--;
                 map[j][i] = '2'; 
-                Sleep(100);
-                gameover();
             }if(map[jc][i] == '@'&&map[jc-1][i] == '_'){
                 map[j][i] = '_';
                 j--;
@@ -198,12 +258,11 @@ if(turn==2){
                 i+=2;
                 map[j][i] = '2';
 
-            }if(map[j][ic] == '*'){
+            }
+            if(map[j][ic] == '*'){
                 map[j][i] = '_'; 
                 i+=2;
                 map[j][i] = '2';
-                Sleep(100);
-                gameover();
             }if(map[j][ic] == '@'&&map[j][ic+2] == '_'){
                 map[j][i] = '_';
                 i+=2;
@@ -225,8 +284,6 @@ if(turn==2){
                 map[j][i] = '_'; 
                 i-=2;
                 map[j][i] = '2';
-                Sleep(100);
-                gameover();
             }if(map[j][ic] == '@'&&map[j][ic-2] == '_'){
                 map[j][i] = '_';
                 i-=2;
@@ -238,7 +295,80 @@ if(turn==2){
             return;
         }
     
-    }}
+    }
+if(turn==2&&P2==2){
+        if(GetAsyncKeyState(0x53)){
+            int jc = j+1;
+            if(map[jc][i] == '_'){
+                map[j][i] = '_'; 
+                j++;
+                map[j][i] = '2';
+            }if(map[jc][i] == '@'&&map[jc+1][i] == '_'){
+                map[j][i] = '_';
+                j++;
+                map[j][i] = '2';
+                map[j+1][i] = '@';
+
+            }
+            turn=1;
+            Sleep(200);
+            return;
+        }
+        if(GetAsyncKeyState(0x57)){
+            int jc = j-1;
+            if(map[jc][i] == '_'){
+                map[j][i] = '_'; 
+                j--;
+                map[j][i] = '2';
+
+            }if(map[jc][i] == '@'&&map[jc-1][i] == '_'){
+                map[j][i] = '_';
+                j--;
+                map[j][i] = '2';
+                map[j-1][i] = '@';
+
+            }
+            turn=1;
+            Sleep(200);
+            return;
+        }
+        if(GetAsyncKeyState(0x44)){
+            int ic = i+2;
+            if(map[j][ic] == '_'){
+                map[j][i] = '_'; 
+                i+=2;
+                map[j][i] = '2';
+
+            }if(map[j][ic] == '@'&&map[j][ic+2] == '_'){
+                map[j][i] = '_';
+                i+=2;
+                map[j][i] = '2';
+                map[j][i+2] = '@';
+
+            }
+            turn=1;
+            Sleep(200);
+            return;
+        }
+        if(GetAsyncKeyState(0x41)){
+            int ic = i-2;
+            if(map[j][ic] == '_'){
+                map[j][i] = '_'; 
+                i-=2;
+                map[j][i] = '2';
+            }if(map[j][ic] == '@'&&map[j][ic-2] == '_'){
+                map[j][i] = '_';
+                i-=2;
+                map[j][i] = '2';
+                map[j][i-2] = '@';
+            }
+            turn=1;
+            Sleep(200);
+            return;
+        }
+    
+    }
+    }
 void Howtoplay(){
 	system("cls");
 	cout<<"\n----------------\n";
@@ -267,7 +397,6 @@ void gameover(){
 
 }
 void gamestart(){
-    role();
     for(int r=0;r<5;r++){
         for(int c=0;c<20;c++){
     map[r][c] = mapset[r][c];
@@ -294,9 +423,9 @@ void gamestart(){
     gotoxy(45,10); 
     cout<<" -------------------------- \n";
     if(turn==1){gotoxy(45,11); 
-                cout << " |  Use WASD to move P1   | \n"; }
+                cout << " |  Use WASD to move P1  | \n"; }
     else {gotoxy(45,11);  
-    cout << " |  Use WASD to move P2   | \n"; }
+    cout << " |  Use WASD to move P2  | \n"; }
     gotoxy(45,12); 
     cout<<" -------------------------- \n";
     system("pause>nul");
@@ -317,7 +446,7 @@ space(50,10); cout<<"  2. How to play  \n";
 space(50,11); cout<<"  3. Quit\n";
 space(50,13); cout<<"Select option: ";
     char option = getche();
-    if( option=='1') gamestart();
+    if( option=='1') role();
     else if( option=='2') Howtoplay(); 
     else if ( option=='3') {
         system("cls");
@@ -345,16 +474,16 @@ void role(){
 	space(50,6); if(P1 == 1)cout << " |   P2 role is Finder  |\n";
 	else cout << " |   P2 role is Survival|\n"; 
 	space(50,7); cout<<" --------------------------\n";
-	space(50,9); cout<<"1. Next \n";
-	space(50,10);cout<<"2. Quit \n";
-	space(50,13);cout<<"Select option: ";
-	char option = getche();
-    if(option=='1');
-    else if( option=='2') menu();
-
-	if( P1 ==1) P2=2;
+    if( P1 ==1) P2=2;
 	else if( P1 ==2) P2=1;
 
 	if( P1 ==1) turn =1;
 	else if( P2 == 1 ) turn=2;
+	space(50,9); cout<<"1. Next \n";
+	space(50,10);cout<<"2. Quit \n";
+	space(50,13);cout<<"Select option: ";
+	char option = getche();
+    if(option=='1') gamestart();
+    else if( option=='2') menu();
+
 }
