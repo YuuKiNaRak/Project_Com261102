@@ -371,15 +371,75 @@ if(turn==2&&P2==2){
     }
 void Howtoplay(){
 	system("cls");
-	cout<<"\n----------------\n";
-	cout<<"|   How to play  |";
-	cout<<"\n----------------";
-	cout<<"\n use W A S D to move";
-	cout<<"\n\n Press 'w' to move up";
-	cout<<"\n Press 's' to move down";
-	cout<<"\n Press 'a' to move left";
-	cout<<"\n Press 'd' to move right";
-	cout<<"\n\nPress any key to go back to menu";
+    int randomcolor;
+	srand(time(0));
+	int a[randomcolor] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
+	int len = 0,x;
+    string text;
+	len = text.length();
+	text = "\n----------------\n";
+    len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+	text = "|   How to play  |";
+    len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+	text = "\n----------------";
+    len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+	text = "\n use W A S D to move";
+    len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+	text = "\n\n Press 'w' to move up";
+    len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+	text = "\n Press 's' to move down";
+    len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+	text = "\n Press 'a' to move left";
+    len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+	text = "\n Press 'd' to move right";
+    len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+	text = "\n\nPress any key to go back to menu";
+    len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
 	getch();
 }
 void gameover(){
@@ -448,16 +508,65 @@ void gamestart(){
 }
 void menu(){
 do{
+int randomcolor;
+srand(time(0));
+int a[randomcolor] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
+int len = 0,x;
+string text;
+len = text.length();
 system("cls");
 SetConsoleTextAttribute(h,6);
-space(50,5); cout<<" -------------------------- \n"; 
-space(50,6); cout<<" |      LostHope Game     | \n"; 
-space(50,7); cout<<" --------------------------\n";
+space(50,5); text = " -------------------------- \n";
+len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+
+space(50,6); text = " |      LostHope Game     | \n";
+len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+space(50,7); text = " --------------------------\n";
+len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
 SetConsoleTextAttribute(h,14);
-space(50,9);  cout<<"  1. Start Game \n";
-space(50,10); cout<<"  2. How to play  \n";	 
-space(50,11); cout<<"  3. Quit\n";
-space(50,13); cout<<"Select option: ";
+space(50,9);  text = "  1. Start Game \n";
+len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+space(50,10); text = "  2. How to play  \n";	 
+len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+space(50,11); text = "  3. Quit\n";
+len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+space(50,13); text = "Select option: ";
+len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
     char option = getche();
     if( option=='1') role();
     else if( option=='2') Howtoplay(); 
@@ -468,22 +577,70 @@ space(50,13); cout<<"Select option: ";
 }
 void role(){
     while(P1==0){
-     system("cls");
+    int randomcolor;
+	srand(time(0));
+	int a[randomcolor] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
+	int len = 0,x;
+    string text;
+	len = text.length();
+    system("cls");
 	SetConsoleTextAttribute(h,4);
-	space(50,5); cout<<" --------------------------- \n"; 
-	space(50,6); cout<<" |     choose role P1      | \n"; 
-	space(50,7); cout<<" ---------------------------\n";
-        space(50,9);  cout<<"1. Survival \n";
-        space(50,10); cout<<"2. Finder \n";
-        space(50,11); cout<<"3. Quit \n";
-        space(50,13); cout<<"Select option: ";
+	space(50,5); text = " --------------------------- \n";
+    len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+	space(50,6); text = " |     choose role P1      | \n";
+    len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+	space(50,7);text = " ---------------------------\n";
+    len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+    space(50,9);  text = "1. Survival \n";
+    len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+    space(50,10); text = "2. Finder \n";
+    len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+    space(50,11); text = "3. Quit \n";
+    len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+    space(50,13); text = "Select option: ";
+    len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
         char option = getche();
         if( option=='1') P1=1;
         else if( option=='2') P1=2;
         else if( option=='3') menu();
     }
     system("cls");
-	space(50,5); cout<<" -------------------------- \n"; 
+	space(50,5); cout << " -------------------------- \n"; 
 	space(50,6); if(P1 == 1)cout << " |   P2 role is Finder  |\n";
 	else cout << " |   P2 role is Survival|\n"; 
 	space(50,7); cout<<" --------------------------\n";
