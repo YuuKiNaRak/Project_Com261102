@@ -35,6 +35,7 @@ void space(int x, int y){
 	SetConsoleCursorPosition(console, CursorPosition);
 }
 
+
 int main(){
 	int randomcolor;
 	srand(time(0));
@@ -291,8 +292,19 @@ void walkPY(){
 		if(set[i]==5){
         cout << "2 ";
         movep2=i;
+        
+        if (movep2 == movep1){
+           system("cls");
+	cout<<endl;
+	cout<<"\t\t--------------------------"<<endl;
+	cout<<"\t\t-------- Game Over -------"<<endl;
+	cout<<"\t\t--------------------------"<<endl<<endl;
+	cout<<"\t\tPress any key to go back to menu.";
+	getch();
+}
         }
-	}
+        }
+	
     cout << "\n";
 	space(50,7); cout<<" -------------------------- \n";
 	space(50,8);if(p1turn == 1)cout<<" |  Use WASD to move P1   | \n"; 
@@ -397,13 +409,4 @@ void testhowtoplay(){
 	cout<<"\n\nPress any key to go back to menu";
 	getch();
 }
-void gameover(){
-	system("cls");
-	cout<<endl;
-	cout<<"\t\t--------------------------"<<endl;
-	cout<<"\t\t-------- Game Over -------"<<endl;
-	cout<<"\t\t--------------------------"<<endl<<endl;
-	cout<<"\t\tPress any key to go back to menu.";
-	getch();
-}
- 
+
