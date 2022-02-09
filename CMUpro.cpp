@@ -14,9 +14,12 @@ int movep1=0;//เดินตามช่องarray
 int movep2=0;//เดินตามช่องarray
 int p1turn=1;//0รอ 1กำลังเดิน -1ตาคนอื่น
 int p2turn=0;//0รอ 1กำลังเดิน -1ตาคนอื่น
-int LV1[50]={1,2,4,1,1,1,2,2,1,1,2,1,2,2,2,2,2,2,2,1,2,2,2,2,2,1,2,2,1,1,2,5,2,1,2,1,3,2,1,1,2,2,2,1,2,2,1,2,2,1};
+int q;
+int LV1[50]={1,2,4,1,1,1,2,2,1,1,2,1,2,2,2,2,2,2,2,1,2,2,2,2,2,1,2,2,1,1,2,5,2,1,2,1,q,2,1,1,2,2,2,1,2,2,1,2,2,1};
 int set[50]={};
 int who=0;
+
+
 
 #define STD_OUTPUT_HANDLE ((DWORD)-11)
 
@@ -39,7 +42,6 @@ void space(int x, int y){
 int main(){
 	int randomcolor;
 	srand(time(0));
-	int a[randomcolor] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
 	int len = 0,x;
     string text;
 	len = text.length();
@@ -255,6 +257,7 @@ else{
 	    randomcolor = rand()%15;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
+		SetConsoleTextAttribute(h,6);
     }
 
 	char option = getche();
@@ -265,14 +268,14 @@ else{
 	if( P1 ==1) p1turn =1;
 	else if( P2 == 1 ) p2turn=1;
 
-	if( option=='1') setmap();
+	if( option=='1')setmap();
 	else if( option=='2') break;
 	}while(P1 >0 and P2>0);
 }
 }
 
 
-void walkPY(){
+bool walkPY(){
 	do{
 	int lastmove=0;//บันทึกการเดิน (เผื่อมันเดินติด)
 	system("cls");
@@ -284,27 +287,28 @@ void walkPY(){
         }
 		if(set[i]==1) cout << "# ";
         if(set[i]==2) cout << "_ ";
-		if(set[i]==3) cout << "* ";
+		if(set[i]==q) cout << "* ";
 	    if(set[i]==4){
         cout << "1 ";
         movep1=i;
         }
 		if(set[i]==5){
-		//***********************************************************//
-		if (movep2 == movep1){
-           system("cls");
-			cout<<endl;
-			cout<<"\t\t--------------------------"<<endl;
-			cout<<"\t\t-------- Game Over -------"<<endl;
-			cout<<"\t\t--------------------------"<<endl<<endl;
-			cout<<"\t\tPress any key to go back to menu.";
-			getch();
-		}
-		//***********************************************************//
         cout << "2 ";
         movep2=i;
+        
+        if (movep2 == movep1){
+           system("cls");
+	cout<<endl;
+	cout<<"\t\t--------------------------"<<endl;
+	cout<<"\t\t-------- Game Over -------"<<endl;
+	cout<<"\t\t--------------------------"<<endl<<endl;
+	cout<<"\t\tPress any key to go back to menu.";
+	getch();
+    return false;
+}
+
         }
-    }
+        }
 	
     cout << "\n";
 	space(50,7); cout<<" -------------------------- \n";
@@ -313,7 +317,6 @@ void walkPY(){
 	space(50,10); cout<<" --------------------------\n";
 	space(50,15); cout<<"Select option: ";
 	char option = getche();
-	//***********************************************************//
 	if(p1turn == 1){
     who=1;
 	if( option=='w') movep1 -= 10;
@@ -328,26 +331,45 @@ void walkPY(){
     else if( option=='a') movep2 -= 1;
     else if( option=='d') movep2 += 1;
 	}
-	
+	/////////////////////////////////////
 	if( option=='w') lastmove -= 10;
 	else if( option=='s') lastmove += 10;
     else if( option=='a') lastmove -= 1;
     else if( option=='d') lastmove += 1;
-	//***********************************************************//
+	/////////////////////////////////////	
 	if( option=='w') checkmap(lastmove,who);
 	else if( option=='s') checkmap(lastmove,who);
     else if( option=='a') checkmap(lastmove,who);
     else if( option=='d') checkmap(lastmove,who);
 	}
     while(1);
+	
+	//if (movep1 == q){
+		/*system ("cls");
+	cout<<endl;
+	cout<<"\t\t--------------------------"<<endl;
+	cout<<"\t\t-------- Game Over -------"<<endl;
+	cout<<"\t\t--------------------------"<<endl<<endl;
+	cout<<"\t\tPress any key to go back to menu.";
+	getch();}*/ // จะทดสอบว่าถ้าp1ไปเก็บของแล้วให้เด้งเกมโอเวอร์ออกมาจะได้เช็คว่าเก็บของได้แล้ว แต่ตอนนี้ยังทำไมไ่ด้ งงยุ
+
+
+
+
 }
 
 void setmap(){
+    
 	for (int i = 0; i < 50; i++)
 	{
 		set[i]=LV1[i];
 	}
 	walkPY();
+
+
+	
+	
+
 }
 void Howtoplay(){
     do{
@@ -365,18 +387,6 @@ void Howtoplay(){
     while(1);
 }
 void checkmap(int lastmove,int who){
-	//***********************************************************
-	int Check1 =-1,Check2 =51,x;
-	if(movep1 <= Check1 or movep1 >=Check2){
-		movep1 -= lastmove;
-		return;
-	}
-	if(movep2 <= Check1 or movep2 >=Check2){
-		movep2 -= lastmove;
-		return;
-	}
-	//***********************************************************
-	
     if(who == 1){
     if(set[movep1] == 1){
     movep1 -= lastmove;
@@ -399,7 +409,6 @@ void checkmap(int lastmove,int who){
         set[movep2-lastmove]=2;
     }
     }
-	
 }
 void time(){
 int sec = 30;
@@ -424,4 +433,3 @@ void testhowtoplay(){
 	cout<<"\n\nPress any key to go back to menu";
 	getch();
 }
-
