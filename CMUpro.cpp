@@ -302,6 +302,8 @@ bool walkPY(){
 	cout<<"\t\t--------------------------"<<endl;
 	cout<<"\t\t-------- Game Over -------"<<endl;
 	cout<<"\t\t--------------------------"<<endl<<endl;
+	cout<<"\t\t P1 you are very noob"<<endl;
+	cout<<"\t\t Go away Now!"<<endl;
 	cout<<"\t\tPress any key to go back to menu.";
 	getch();
     return false;
@@ -343,6 +345,8 @@ bool walkPY(){
     else if( option=='d') checkmap(lastmove,who);
 	}
     while(1);
+
+	
 	
 	//if (movep1 == q){
 		/*system ("cls");
