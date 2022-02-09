@@ -290,20 +290,21 @@ void walkPY(){
         movep1=i;
         }
 		if(set[i]==5){
+		//***********************************************************//
+		if (movep2 == movep1){
+           system("cls");
+			cout<<endl;
+			cout<<"\t\t--------------------------"<<endl;
+			cout<<"\t\t-------- Game Over -------"<<endl;
+			cout<<"\t\t--------------------------"<<endl<<endl;
+			cout<<"\t\tPress any key to go back to menu.";
+			getch();
+		}
+		//***********************************************************//
         cout << "2 ";
         movep2=i;
-        
-        if (movep2 == movep1){
-           system("cls");
-	cout<<endl;
-	cout<<"\t\t--------------------------"<<endl;
-	cout<<"\t\t-------- Game Over -------"<<endl;
-	cout<<"\t\t--------------------------"<<endl<<endl;
-	cout<<"\t\tPress any key to go back to menu.";
-	getch();
-}
         }
-        }
+    }
 	
     cout << "\n";
 	space(50,7); cout<<" -------------------------- \n";
@@ -312,6 +313,7 @@ void walkPY(){
 	space(50,10); cout<<" --------------------------\n";
 	space(50,15); cout<<"Select option: ";
 	char option = getche();
+	//***********************************************************//
 	if(p1turn == 1){
     who=1;
 	if( option=='w') movep1 -= 10;
@@ -326,12 +328,12 @@ void walkPY(){
     else if( option=='a') movep2 -= 1;
     else if( option=='d') movep2 += 1;
 	}
-	/////////////////////////////////////
+	
 	if( option=='w') lastmove -= 10;
 	else if( option=='s') lastmove += 10;
     else if( option=='a') lastmove -= 1;
     else if( option=='d') lastmove += 1;
-	/////////////////////////////////////	
+	//***********************************************************//
 	if( option=='w') checkmap(lastmove,who);
 	else if( option=='s') checkmap(lastmove,who);
     else if( option=='a') checkmap(lastmove,who);
@@ -363,6 +365,18 @@ void Howtoplay(){
     while(1);
 }
 void checkmap(int lastmove,int who){
+	//***********************************************************
+	int Check1 =-1,Check2 =51,x;
+	if(movep1 <= Check1 or movep1 >=Check2){
+		movep1 -= lastmove;
+		return;
+	}
+	if(movep2 <= Check1 or movep2 >=Check2){
+		movep2 -= lastmove;
+		return;
+	}
+	//***********************************************************
+	
     if(who == 1){
     if(set[movep1] == 1){
     movep1 -= lastmove;
@@ -385,6 +399,7 @@ void checkmap(int lastmove,int who){
         set[movep2-lastmove]=2;
     }
     }
+	
 }
 void time(){
 int sec = 30;
