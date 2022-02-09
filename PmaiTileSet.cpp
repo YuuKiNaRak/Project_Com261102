@@ -1,522 +1,91 @@
 #include <iostream>
 #include <conio.h>
 #include <string>
-#include "windows.h"
+#include <windows.h>
 #include <dos.h>
-#include<fstream>
 #include <time.h> 
+using namespace std;
+
+int x = 0 ;
+int y = 0 ;
+int P1=0;
+int P2=0;
+int movep1=0;//เดินตามช่องarray
+int movep2=0;//เดินตามช่องarray
+int p1turn=1;//0รอ 1กำลังเดิน -1ตาคนอื่น
+int p2turn=0;//0รอ 1กำลังเดิน -1ตาคนอื่น
+int LV1[50]={1,2,4,1,1,1,2,2,1,1,2,1,2,2,2,2,2,2,2,1,2,2,2,2,2,1,2,2,1,1,2,5,2,1,2,1,3,2,1,1,2,2,2,1,2,2,1,2,2,1};
+
+int set[50]={};
+int who=0;
+
+
+
 #define STD_OUTPUT_HANDLE ((DWORD)-11)
 
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 COORD CursorPosition;
-HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 
-using namespace std;
-void p1();
-void p2();
-void gamestart();
+void time();
+void testhowtoplay();
+void setmap();
 void Howtoplay();
-void gameover();
-void menu();
-void role();
-void gotoxy( short x, short y ){
-    COORD pos{x,y};
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),pos);
-  }
+void checkmap(int lastmove,int who);
+void passcode();//เดะค่อยมาทำ
 void space(int x, int y){
 	CursorPosition.X = x;
 	CursorPosition.Y = y;
 	SetConsoleCursorPosition(console, CursorPosition);
 }
-char mapset[5][20] = {
-"# _ _ # # # _ _ # #",  
-"_ # _ _ _ 2 _ _ _ #",    
-"_ _ @ _ _ # _ _ # #",  
-"_ _ _ # _ # * _ # #",    
-"_ _ _ # _ _ # _ 1 #"};
-char map[5][20];
-int x,y,i,j;
-int times=60;
-//spawnpoint
-int turn=0,P1=0,P2=0;
-bool game_runner = true;
+
 
 int main(){
-srand(time(0));
-menu();
-return 0; 
-}
-void p1(){
-      if(turn==1&&P1==1){
-        if(GetAsyncKeyState(0x53)){
-            int yc = y+1;
-            if(map[yc][x] == '_'){
-                map[y][x] = '_'; 
-                y++;
-                map[y][x] = '1';
-            }if(map[yc][x] == '*'){
-                map[y][x] = '_';
-                y++; 
-                map[y][x] = '1';
-            }if(map[yc][x] == '@'&&map[yc+1][x] == '_'){
-                map[y][x] = '_';
-                y++;
-                map[y][x] = '1';
-                map[y+1][x] = '@';
-            }
-            turn=2;
-            Sleep(200);
-            return;
-        }
-        if(GetAsyncKeyState(0x57)){
-            int yc = y-1;
-            if(map[yc][x] == '_'){
-                map[y][x] = '_'; 
-                y--;
-                map[y][x] = '1';
-
-            }if(map[yc][x] == '*'){
-                map[y][x] = '_'; 
-                y--;
-                map[y][x] = '1';
-            }if(map[yc][x] == '@'&&map[yc-1][x] == '_'){
-                map[y][x] = '_';
-                y--;
-                map[y][x] = '1';
-                map[y-1][x] = '@';
-
-            }
-            turn=2;
-            Sleep(200);
-            return;
-        }
-        if(GetAsyncKeyState(0x44)){
-            int xc = x+2;
-            if(map[y][xc] == '_'){
-                map[y][x] = '_'; 
-                x+=2;
-                map[y][x] = '1';
-
-            }if(map[y][xc] == '*'){
-                map[y][x] = '_'; 
-                x+=2;
-                map[y][x] = '1';
-            }if(map[y][xc] == '@'&&map[y][xc+2] == '_'){
-                map[y][x] = '_';
-                x+=2;
-                map[y][x] = '1';
-                map[y][x+2] = '@';
-
-            }
-            turn=2;
-            Sleep(200);
-            return;
-        }
-        if(GetAsyncKeyState(0x41)){
-            int xc = x-2;
-            if(map[y][xc] == '_'){
-                map[y][x] = '_'; 
-                x-=2;
-                map[y][x] = '1';
-                }if(map[y][xc] == '*'){
-                map[y][x] = '_'; 
-                x-=2;
-                map[y][x] = '1';
-                }if(map[y][xc] == '@'&&map[y][xc-2] == '_'){
-                map[y][x] = '_';
-                x-=2;
-                map[y][x] = '1';
-                map[y][x-2] = '@';
-
-            }
-            turn=2;
-            Sleep(200);
-            return;
-        }
-    }
-    if(turn==1&&P1==2){
-        if(GetAsyncKeyState(0x53)){
-            int yc = y+1;
-            if(map[yc][x] == '_'){
-                map[y][x] = '_'; 
-                y++;
-                map[y][x] = '1';
-            }if(map[yc][x] == '@'&&map[yc+1][x] == '_'){
-                map[y][x] = '_';
-                y++;
-                map[y][x] = '1';
-                map[y+1][x] = '@';
-            }
-            turn=2;
-            Sleep(200);
-            return;
-        }
-        if(GetAsyncKeyState(0x57)){
-            int yc = y-1;
-            if(map[yc][x] == '_'){
-                map[y][x] = '_'; 
-                y--;
-                map[y][x] = '1';
-
-            }if(map[yc][x] == '@'&&map[yc-1][x] == '_'){
-                map[y][x] = '_';
-                y--;
-                map[y][x] = '1';
-                map[y-1][x] = '@';
-
-            }
-            turn=2;
-            Sleep(200);
-            return;
-        }
-        if(GetAsyncKeyState(0x44)){
-            int xc = x+2;
-            if(map[y][xc] == '_'){
-                map[y][x] = '_'; 
-                x+=2;
-                map[y][x] = '1';
-
-            }if(map[y][xc] == '@'&&map[y][xc+2] == '_'){
-                map[y][x] = '_';
-                x+=2;
-                map[y][x] = '1';
-                map[y][x+2] = '@';
-
-            }
-            turn=2;
-            Sleep(200);
-            return;
-        }
-        if(GetAsyncKeyState(0x41)){
-            int xc = x-2;
-            if(map[y][xc] == '_'){
-                map[y][x] = '_'; 
-                x-=2;
-                map[y][x] = '1';
-                }if(map[y][xc] == '@'&&map[y][xc-2] == '_'){
-                map[y][x] = '_';
-                x-=2;
-                map[y][x] = '1';
-                map[y][x-2] = '@';
-
-            }
-            turn=2;
-            Sleep(200);
-            return;
-        }
-    }
-}
-void p2(){
-if(turn==2&&P2==1){
-        if(GetAsyncKeyState(0x53)){
-            int jc = j+1;
-            if(map[jc][i] == '_'){
-                map[j][i] = '_'; 
-                j++;
-                map[j][i] = '2';
-            }if(map[jc][i] == '*'){
-                map[j][i] = '_'; 
-                j++;
-                map[j][i] = '2';
-            }if(map[jc][i] == '@'&&map[jc+1][i] == '_'){
-                map[j][i] = '_';
-                j++;
-                map[j][i] = '2';
-                map[j+1][i] = '@';
-
-            }
-            turn=1;
-            Sleep(200);
-            return;
-        }
-        if(GetAsyncKeyState(0x57)){
-            int jc = j-1;
-            if(map[jc][i] == '_'){
-                map[j][i] = '_'; 
-                j--;
-                map[j][i] = '2';
-
-            }if(map[jc][i] == '*'){
-                map[j][i] = '_';
-                j--;
-                map[j][i] = '2'; 
-            }if(map[jc][i] == '@'&&map[jc-1][i] == '_'){
-                map[j][i] = '_';
-                j--;
-                map[j][i] = '2';
-                map[j-1][i] = '@';
-
-            }
-            turn=1;
-            Sleep(200);
-            return;
-        }
-        if(GetAsyncKeyState(0x44)){
-            int ic = i+2;
-            if(map[j][ic] == '_'){
-                map[j][i] = '_'; 
-                i+=2;
-                map[j][i] = '2';
-
-            }
-            if(map[j][ic] == '*'){
-                map[j][i] = '_'; 
-                i+=2;
-                map[j][i] = '2';
-            }if(map[j][ic] == '@'&&map[j][ic+2] == '_'){
-                map[j][i] = '_';
-                i+=2;
-                map[j][i] = '2';
-                map[j][i+2] = '@';
-
-            }
-            turn=1;
-            Sleep(200);
-            return;
-        }
-        if(GetAsyncKeyState(0x41)){
-            int ic = i-2;
-            if(map[j][ic] == '_'){
-                map[j][i] = '_'; 
-                i-=2;
-                map[j][i] = '2';
-            }if(map[j][ic] == '*'){
-                map[j][i] = '_'; 
-                i-=2;
-                map[j][i] = '2';
-            }if(map[j][ic] == '@'&&map[j][ic-2] == '_'){
-                map[j][i] = '_';
-                i-=2;
-                map[j][i] = '2';
-                map[j][i-2] = '@';
-            }
-            turn=1;
-            Sleep(200);
-            return;
-        }
-    
-    }
-if(turn==2&&P2==2){
-        if(GetAsyncKeyState(0x53)){
-            int jc = j+1;
-            if(map[jc][i] == '_'){
-                map[j][i] = '_'; 
-                j++;
-                map[j][i] = '2';
-            }if(map[jc][i] == '@'&&map[jc+1][i] == '_'){
-                map[j][i] = '_';
-                j++;
-                map[j][i] = '2';
-                map[j+1][i] = '@';
-
-            }
-            turn=1;
-            Sleep(200);
-            return;
-        }
-        if(GetAsyncKeyState(0x57)){
-            int jc = j-1;
-            if(map[jc][i] == '_'){
-                map[j][i] = '_'; 
-                j--;
-                map[j][i] = '2';
-
-            }if(map[jc][i] == '@'&&map[jc-1][i] == '_'){
-                map[j][i] = '_';
-                j--;
-                map[j][i] = '2';
-                map[j-1][i] = '@';
-
-            }
-            turn=1;
-            Sleep(200);
-            return;
-        }
-        if(GetAsyncKeyState(0x44)){
-            int ic = i+2;
-            if(map[j][ic] == '_'){
-                map[j][i] = '_'; 
-                i+=2;
-                map[j][i] = '2';
-
-            }if(map[j][ic] == '@'&&map[j][ic+2] == '_'){
-                map[j][i] = '_';
-                i+=2;
-                map[j][i] = '2';
-                map[j][i+2] = '@';
-
-            }
-            turn=1;
-            Sleep(200);
-            return;
-        }
-        if(GetAsyncKeyState(0x41)){
-            int ic = i-2;
-            if(map[j][ic] == '_'){
-                map[j][i] = '_'; 
-                i-=2;
-                map[j][i] = '2';
-            }if(map[j][ic] == '@'&&map[j][ic-2] == '_'){
-                map[j][i] = '_';
-                i-=2;
-                map[j][i] = '2';
-                map[j][i-2] = '@';
-            }
-            turn=1;
-            Sleep(200);
-            return;
-        }
-    
-    }
-    }
-void Howtoplay(){
-	system("cls");
-    int randomcolor;
+	int randomcolor;
 	srand(time(0));
-	int a[randomcolor] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
 	int len = 0,x;
     string text;
 	len = text.length();
-	text = "\n----------------\n";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%15;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-	text = "|   How to play  |";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%15;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-	text = "\n----------------";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%15;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-	text = "\n use W A S D to move";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%15;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-	text = "\n\n Press 'w' to move up";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%15;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-	text = "\n Press 's' to move down";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%15;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-	text = "\n Press 'a' to move left";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%15;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-	text = "\n Press 'd' to move right";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%15;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-	text = "\n\nPress any key to go back to menu";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%15;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-	getch();
-}
-void gameover(){
-    if(turn ==1){
-	system("cls");
-	cout<<endl;
-	space(50,5);cout<<"\t\t------------------------------"<<endl;
-	space(50,6);cout<<"\t\t-------- Player 1 wins -------"<<endl;
-	space(50,7);cout<<"\t\t------------------------------"<<endl<<endl;
-	space(47,8);cout<<"\t\tPress any key to go back to menu.";
-    P1=0;
-    P2=0;
-    turn=0;
-    getche();
-    menu();
-    }else if (turn ==2){
-        system("cls");
-	    cout<<endl;
-	    space(50,5);cout<<"\t\t------------------------------"<<endl;
-	    space(50,6);cout<<"\t\t-------- Player 2 wins -------"<<endl;
-	    space(50,7);cout<<"\t\t------------------------------"<<endl<<endl;
-	    space(47,8);cout<<"\t\tPress any key to go back to menu.";
-        P1=0;
-        P2=0;
-        turn=0;
-        getche();
-        menu();
-    }
-}
-void gamestart(){
-    for(int r=0;r<5;r++){
-        for(int c=0;c<20;c++){
-    map[r][c] = mapset[r][c];
-        }
-    }
-    for(int r=0;r<5;r++){
-        for(int c=0;c<20;c++){
-            if(map[r][c]=='1') {
-                y=r;
-                x=c;
-            }if(map[r][c]=='2') {
-                j=r;
-                i=c;
-            }
-        }
-     }
-     Sleep(100);
-    while(game_runner == true){
-    system("cls");
-        for(int dp=0;dp<5;dp++){
-            space(50,dp+5);
-            cout << map[dp] << endl;
-        }
-    gotoxy(45,10); 
-    cout<<" -------------------------- \n";
-    if(turn==1){gotoxy(45,11); 
-                cout << " |  Use WASD to move P1  | \n"; }
-    else {gotoxy(45,11);  
-    cout << " |  Use WASD to move P2  | \n"; }
-    gotoxy(45,12); 
-    cout<<" -------------------------- \n";
-    system("pause>nul");
-            p1();
-            p2();
-    }
-}
-void menu(){
+	
+	
+	
+HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+int ST=0;
 do{
-int randomcolor;
-srand(time(0));
-int a[randomcolor] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
-int len = 0,x;
-string text;
-len = text.length();
 system("cls");
-SetConsoleTextAttribute(h,6);
-space(50,5); text = " -------------------------- \n";
+
+	
+	space(50,5);
+	text = " -------------------------- \n";
+    len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+
+
+space(50,6); 
+ text = " |      LostHope Game     | \n";
+len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];
+	}
+
+
+space(50,7); 
+text = " -------------------------- \n";
+    len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+
+
+space(50,9);
+text = "  1. Start Game \n";
 len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15;
@@ -524,136 +93,351 @@ len = text.length();
 		cout << text[x];	
     }
 
-space(50,6); text = " |      LostHope Game     | \n";
+  
+space(50,10); 
+text ="  2. How to play  \n";	
 len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-space(50,7); text = " --------------------------\n";
+
+space(50,11);
+ text = "  3. Quit\n";
 len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-SetConsoleTextAttribute(h,14);
-space(50,9);  text = "  1. Start Game \n";
+
+space(50,13);
+text = "Select option: ";
 len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-space(50,10); text = "  2. How to play  \n";	 
-len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%15;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-space(50,11); text = "  3. Quit\n";
-len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%15;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-space(50,13); text = "Select option: ";
-len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%15;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-    char option = getche();
-    if( option=='1') role();
-    else if( option=='2') Howtoplay(); 
-    else if ( option=='3') {
-        system("cls");
-        return; }
-}while(1);
-}
-void role(){
-    while(P1==0){
-    int randomcolor;
-	srand(time(0));
-	int a[randomcolor] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
-	int len = 0,x;
-    string text;
-	len = text.length();
+
+char option = getche();
+if( option=='1') ST +=1;
+else if( option=='2') Howtoplay();
+else if( option=='3') break;	
+}while(ST == 0);
+/////////////////////////////////////
+if(ST == 0){}
+else{
+    do{
     system("cls");
 	SetConsoleTextAttribute(h,4);
-	space(50,5); text = " --------------------------- \n";
-    len = text.length();
+	
+	space(50,5);  
+	text = " --------------------------- \n"; 
+	len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-	space(50,6); text = " |     choose role P1      | \n";
-    len = text.length();
+
+	space(50,6); text = " |     choose role P1      | \n"; 
+	len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-	space(50,7);text = " ---------------------------\n";
-    len = text.length();
+
+	space(50,7); text = " ---------------------------\n";
+	len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-    space(50,9);  text = "1. Survival \n";
-    len = text.length();
+
+	if( P1==0){
+	space(50,9);  text = "1. Survival \n";
+	len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-    space(50,10); text = "2. Finder \n";
-    len = text.length();
+
+	space(50,10);text = "2. Finder \n";
+	len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-    space(50,11); text = "3. Quit \n";
-    len = text.length();
+
+	space(50,11); text = "3. Quit \n";
+	len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-    space(50,13); text = "Select option: ";
-    len = text.length();
+
+	space(50,13); text = "Select option: ";
+	len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-        char option = getche();
-        if( option=='1') P1=1;
-        else if( option=='2') P1=2;
-        else if( option=='3') menu();
-    }
+
+	char option = getche();
+		
+	if( option=='1') P1=1;
+	else if( option=='2') P1=2;
+	else if( option=='3') break;
+	}
+	}while(P1 == 0 and P2 ==0);
+	/////////////////////////////////////
+    do{
     system("cls");
-	space(50,5); cout << " -------------------------- \n"; 
-	space(50,6); if(P1 == 1)cout << " |   P2 role is Finder  |\n";
-	else cout << " |   P2 role is Survival|\n"; 
-	space(50,7); cout<<" --------------------------\n";
-    if( P1 ==1) P2=2;
+	space(50,5); text = " -------------------------- \n"; 
+	len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+
+	space(50,6); if(P1 == 1){text = " |   P2 role is Finder  |\n";
+	len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+	}
+
+	else{ text =  " |   P2 role is Survival|\n"; 
+	len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+	}
+
+	space(50,7); text = " --------------------------\n";
+	len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+
+	space(50,9); text = "1. Next \n";
+	len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+
+	space(50,10);text = "2. Quit \n";
+	len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+    }
+
+	space(50,13);text = "Select option: ";
+	len = text.length();
+	for(x=0;x<len;x++){
+	    randomcolor = rand()%15;
+		SetConsoleTextAttribute(h,randomcolor);
+		cout << text[x];	
+		SetConsoleTextAttribute(h,6);
+    }
+
+	char option = getche();
+
+	if( P1 ==1) P2=2;
 	else if( P1 ==2) P2=1;
 
-	if( P1 ==1) turn =1;
-	else if( P2 == 1 ) turn=2;
-	space(50,9); cout<<"1. Next \n";
-	space(50,10);cout<<"2. Quit \n";
-	space(50,13);cout<<"Select option: ";
-	char option = getche();
-    if(option=='1') gamestart();
-    else if( option=='2') menu();
+	if( P1 ==1) p1turn =1;
+	else if( P2 == 1 ) p2turn=1;
 
+	if( option=='1')setmap();
+	else if( option=='2') break;
+	}while(P1 >0 and P2>0);
+}
+}
+
+
+bool walkPY(){
+	do{
+	int lastmove=0;//บันทึกการเดิน (เผื่อมันเดินติด)
+	system("cls");
+	for (int i = 0; i < 50; i++)
+	{	
+		if(i%10==0){
+        cout << "\n";
+        for(int y = 0; y < 55; y++){ cout << " ";}
+        }
+		if(set[i]==1) cout << "# ";
+        if(set[i]==2) cout << "_ ";
+		if(set[i]==3) cout << "* ";
+	    if(set[i]==4){
+        cout << "1 ";
+        movep1=i;
+        }
+		if(set[i]==5){
+        cout << "2 ";
+        movep2=i;
+
+
+
+//เมื่อmovep1เก็บ*แล้วให้เกิดevenบางอย่างเพื่อเช็คว่ามันสามารถเก็บ*ได้หรือยัง
+int cc,next,jojo = 3;
+	for(cc = 0;cc<50;cc++){
+	if(jojo == LV1[cc]){
+		int next = cc;
+		
+	if (movep1 == next){
+		system ("cls");
+	cout<<"next map but not now";
+	} 
+	}	
+	
+}
+
+
+
+        
+        if (movep2 == movep1){
+           system("cls");
+	cout<<endl;
+	cout<<"\t\t--------------------------"<<endl;
+	cout<<"\t\t-------- Game Over -------"<<endl;
+	cout<<"\t\t--------------------------"<<endl<<endl;
+	cout<<"\t\t P1 you are very noob"<<endl;
+	cout<<"\t\t Go away Now!"<<endl;
+	cout<<"\t\tPress any key to go back to menu.";
+	getch();
+	return false;}
+
+        }
+        }
+	
+    cout << "\n";
+	space(50,7); cout<<" -------------------------- \n";
+	space(50,8);if(p1turn == 1)cout<<" |  Use WASD to move P1   | \n"; 
+	space(50,8);if(p2turn == 1) cout<<" |  Use WASD to move P2   | \n"; 
+	space(50,10); cout<<" --------------------------\n";
+	space(50,15); cout<<"Select option: ";
+	char option = getche();
+	if(p1turn == 1){
+    who=1;
+	if( option=='w') movep1 -= 10;
+	else if( option=='s') movep1 += 10;
+    else if( option=='a') movep1 -= 1;
+    else if( option=='d') movep1 += 1;
+	}
+	if(p2turn == 1){
+    who=2;
+	if( option=='w') movep2 -= 10;
+	else if( option=='s') movep2 += 10;
+    else if( option=='a') movep2 -= 1;
+    else if( option=='d') movep2 += 1;
+	}
+	/////////////////////////////////////
+	if( option=='w') lastmove -= 10;
+	else if( option=='s') lastmove += 10;
+    else if( option=='a') lastmove -= 1;
+    else if( option=='d') lastmove += 1;
+	/////////////////////////////////////	
+	if( option=='w') checkmap(lastmove,who);
+	else if( option=='s') checkmap(lastmove,who);
+    else if( option=='a') checkmap(lastmove,who);
+    else if( option=='d') checkmap(lastmove,who);
+	}
+    while(1);
+
+}
+
+void setmap(){
+    
+	for (int i = 0; i < 50; i++)
+	{
+		set[i]=LV1[i];
+	}
+	walkPY();
+
+
+	
+	
+
+}
+void Howtoplay(){
+    do{
+    system("cls");
+	cout<<" -------------------------- \n"; 
+	cout<<" |        (How)           | \n"; 
+	cout<<" --------------------------\n";
+	cout<<"1. Back\n";	 
+	cout << "2. start\n";
+	cout<<"Select option: ";
+	char option = getche();
+	if( option=='1') return;
+	else if(option == '2')testhowtoplay();	
+    }
+    while(1);
+}
+void checkmap(int lastmove,int who){
+    if(who == 1){
+    if(set[movep1] == 1){
+    movep1 -= lastmove;
+    } 
+    else{
+        p2turn=1;
+        p1turn=0;
+        set[movep1]=4;
+        set[movep1-lastmove]=2;
+        }
+    }
+    if(who == 2){
+    if(set[movep2] == 1){
+    movep2 -= lastmove;
+    } 
+    else{
+        p2turn=0;
+        p1turn=1;
+	    set[movep2]=5;
+        set[movep2-lastmove]=2;
+    }
+    }
+}
+void time(){
+int sec = 30;
+while(true){
+
+	system("cls");
+	cout << sec << endl;
+	sec--;
+	Sleep (1000);
+}
+}
+void testhowtoplay(){
+	system("cls");
+	cout<<"\n----------------\n";
+	cout<<"|   How to play  |";
+	cout<<"\n----------------";
+	cout<<"\n use 1 2 3 4 to move";
+	cout<<"\n\n Press '1' to move up";
+	cout<<"\n Press '2' to move down";
+	cout<<"\n Press '3' to move left";
+	cout<<"\n Press '4' to move right";
+	cout<<"\n\nPress any key to go back to menu";
+	getch();
 }
