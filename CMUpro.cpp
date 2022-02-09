@@ -14,8 +14,8 @@ int movep1=0;//เดินตามช่องarray
 int movep2=0;//เดินตามช่องarray
 int p1turn=1;//0รอ 1กำลังเดิน -1ตาคนอื่น
 int p2turn=0;//0รอ 1กำลังเดิน -1ตาคนอื่น
-int q;
-int LV1[50]={1,2,4,1,1,1,2,2,1,1,2,1,2,2,2,2,2,2,2,1,2,2,2,2,2,1,2,2,1,1,2,5,2,1,2,1,q,2,1,1,2,2,2,1,2,2,1,2,2,1};
+int LV1[50]={1,2,4,1,1,1,2,2,1,1,2,1,2,2,2,2,2,2,2,1,2,2,2,2,2,1,2,2,1,1,2,5,2,1,2,1,3,2,1,1,2,2,2,1,2,2,1,2,2,1};
+
 int set[50]={};
 int who=0;
 
@@ -287,7 +287,7 @@ bool walkPY(){
         }
 		if(set[i]==1) cout << "# ";
         if(set[i]==2) cout << "_ ";
-		if(set[i]==q) cout << "* ";
+		if(set[i]==3) cout << "* ";
 	    if(set[i]==4){
         cout << "1 ";
         movep1=i;
@@ -295,6 +295,25 @@ bool walkPY(){
 		if(set[i]==5){
         cout << "2 ";
         movep2=i;
+
+
+
+//เมื่อmovep1เก็บ*แล้วให้เกิดevenบางอย่างเพื่อเช็คว่ามันสามารถเก็บ*ได้หรือยัง
+int cc,next,jojo = 3;
+	for(cc = 0;cc<50;cc++){
+	if(jojo == LV1[cc]){
+		int next = cc;
+		
+	if (movep1 == next){
+		system ("cls");
+	cout<<"next map but not now";
+	} 
+	}	
+	
+}
+
+
+
         
         if (movep2 == movep1){
            system("cls");
@@ -306,8 +325,7 @@ bool walkPY(){
 	cout<<"\t\t Go away Now!"<<endl;
 	cout<<"\t\tPress any key to go back to menu.";
 	getch();
-    return false;
-}
+	return false;}
 
         }
         }
@@ -345,20 +363,6 @@ bool walkPY(){
     else if( option=='d') checkmap(lastmove,who);
 	}
     while(1);
-
-	
-	
-	//if (movep1 == q){
-		/*system ("cls");
-	cout<<endl;
-	cout<<"\t\t--------------------------"<<endl;
-	cout<<"\t\t-------- Game Over -------"<<endl;
-	cout<<"\t\t--------------------------"<<endl<<endl;
-	cout<<"\t\tPress any key to go back to menu.";
-	getch();}*/ // จะทดสอบว่าถ้าp1ไปเก็บของแล้วให้เด้งเกมโอเวอร์ออกมาจะได้เช็คว่าเก็บของได้แล้ว แต่ตอนนี้ยังทำไมไ่ด้ งงยุ
-
-
-
 
 }
 
