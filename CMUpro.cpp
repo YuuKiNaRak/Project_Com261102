@@ -325,7 +325,7 @@ int cc,next,jojo = 3;
 	cout<<"\t\t Go away Now!"<<endl;
 	cout<<"\t\tPress any key to go back to menu.";
 	getch();
-	return false;}
+	return 0;}
 
         }
         }
