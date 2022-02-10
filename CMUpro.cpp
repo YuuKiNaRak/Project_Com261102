@@ -4,19 +4,24 @@
 #include <windows.h>
 #include <dos.h>
 #include <time.h> 
+
 using namespace std;
 
 int x = 0 ;
 int y = 0 ;
-int P1=0;
-int P2=0;
+char P1 = 'E';
+char P2 = 'E';
 int movep1=0;//เดินตามช่องarray
 int movep2=0;//เดินตามช่องarray
-int p1turn=1;//0รอ 1กำลังเดิน -1ตาคนอื่น
-int p2turn=0;//0รอ 1กำลังเดิน -1ตาคนอื่น
+char Turn = 'S';
 int LV1[50]={1,2,4,1,1,1,2,2,1,1,2,1,2,2,2,2,2,2,2,1,2,2,2,2,2,1,2,2,1,1,2,5,2,1,2,1,3,2,1,1,2,2,2,1,2,2,1,2,2,1};
-
+int LV2[50]={2,2,2,3,1,2,1,2,2,2,2,1,1,2,1,2,2,2,1,2,2,1,1,2,1,2,1,2,1,2,2,2,2,2,2,2,2,2,1,1,4,1,3,1,2,1,1,2,2,5};
+int LV3[50]={4,2,1,3,1,2,2,2,2,2,2,2,2,2,2,2,1,2,1,2,2,1,2,1,2,1,2,2,1,2,2,1,2,1,2,1,2,2,1,2,1,3,2,2,2,2,3,2,1,5};
+int LV4[50]={4,1,2,2,2,1,3,1,2,2,2,1,2,1,2,2,2,2,2,1,2,1,2,1,2,1,1,1,2,2,2,1,2,1,2,2,2,2,2,1,2,2,2,1,2,1,3,1,2,5};
+int LV5[50]={4,2,2,1,2,1,2,2,2,1,2,1,2,1,2,1,2,1,1,5,2,2,2,1,3,2,2,2,1,2,2,1,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1,1,1};
+int LV6[50]={1,1,1,1,1,1,2,2,2,2,4,2,2,2,1,2,1,1,2,2,1,5,2,3,2,1,1,1,1,2,2,2,2,1,1,2,2,2,2,1,1,1,1,1,1,2,2,1,2,1};
 int set[50]={};
+int setlevel=0;
 int who=0;
 
 
@@ -192,12 +197,11 @@ else{
     }
 
 	char option = getche();
-		
-	if( option=='1') P1=1;
-	else if( option=='2') P1=2;
+	if( option=='1') P1 = 'S';
+	else if( option=='2') P1 = 'F';
 	else if( option=='3') break;
 	}
-	}while(P1 == 0 and P2 ==0);
+	}while(P1 != 'E');
 	/////////////////////////////////////
     do{
     system("cls");
@@ -209,7 +213,7 @@ else{
 		cout << text[x];	
     }
 
-	space(50,6); if(P1 == 1){text = " |   P2 role is Finder  |\n";
+	space(50,6); if(P1 == 'S'){text = " |   P2 role is Finder  |\n";
 	len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15;
@@ -250,7 +254,7 @@ else{
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-
+	
 	space(50,13);text = "Select option: ";
 	len = text.length();
 	for(x=0;x<len;x++){
@@ -262,15 +266,12 @@ else{
 
 	char option = getche();
 
-	if( P1 ==1) P2=2;
-	else if( P1 ==2) P2=1;
-
-	if( P1 ==1) p1turn =1;
-	else if( P2 == 1 ) p2turn=1;
+	if( P1 == 'S') P2 = 'F';
+	else if( P1 == 'F') P2 = 'S';
 
 	if( option=='1')setmap();
 	else if( option=='2') break;
-	}while(P1 >0 and P2>0);
+	}while( P2 != 'E');
 }
 }
 
@@ -296,61 +297,63 @@ bool walkPY(){
         cout << "2 ";
         movep2=i;
 
-
-
-//เมื่อmovep1เก็บ*แล้วให้เกิดevenบางอย่างเพื่อเช็คว่ามันสามารถเก็บ*ได้หรือยัง
-int cc,next,jojo = 3;
-	for(cc = 0;cc<50;cc++){
-	if(jojo == LV1[cc]){
-		int next = cc;
-		
-	if (movep1 == next){
-		system ("cls");
-	cout<<"next map but not now";
-	} 
-	}	
-	
-}
-
-
-
-        
-        if (movep2 == movep1){
-           system("cls");
+    if (movep2 == movep1){
+   	system("cls");
 	cout<<endl;
 	cout<<"\t\t--------------------------"<<endl;
 	cout<<"\t\t-------- Game Over -------"<<endl;
 	cout<<"\t\t--------------------------"<<endl<<endl;
-	cout<<"\t\t P1 you are very noob"<<endl;
+	cout<<"\t\t P1 you are very noob"<<endl; //ไอสัสมึงพิมใช่ไหมบิววววววววว
 	cout<<"\t\t Go away Now!"<<endl;
 	cout<<"\t\tPress any key to go back to menu.";
 	getch();
-	return 0;}
-
-        }
-        }
+	return 0;
+	}
+    	}
+    }
 	
     cout << "\n";
+	cout << P1 << " " << P2;
 	space(50,7); cout<<" -------------------------- \n";
-	space(50,8);if(p1turn == 1)cout<<" |  Use WASD to move P1   | \n"; 
-	space(50,8);if(p2turn == 1) cout<<" |  Use WASD to move P2   | \n"; 
+	space(50,8);if(Turn == 'S')cout<<" |  Use WASD to move Survival  | \n"; 
+	space(50,8);if(Turn == 'F') cout<<" |  Use WASD to move Finder   | \n"; 
 	space(50,10); cout<<" --------------------------\n";
 	space(50,15); cout<<"Select option: ";
 	char option = getche();
-	if(p1turn == 1){
-    who=1;
+	if(Turn == 'S'){
+	if(P1 == 'S'){
+	who=1;
 	if( option=='w') movep1 -= 10;
 	else if( option=='s') movep1 += 10;
-    else if( option=='a') movep1 -= 1;
-    else if( option=='d') movep1 += 1;
+	else if( option=='a') movep1 -= 1;
+	else if( option=='d') movep1 += 1;
 	}
-	if(p2turn == 1){
-    who=2;
+	else{
+	who=2;
 	if( option=='w') movep2 -= 10;
 	else if( option=='s') movep2 += 10;
-    else if( option=='a') movep2 -= 1;
-    else if( option=='d') movep2 += 1;
+	else if( option=='a') movep2 -= 1;
+	else if( option=='d') movep2 += 1;
 	}
+	}
+
+	if(Turn == 'F'){
+	if(P1 == 'F'){
+	who=1;
+	if( option=='w') movep1 -= 10;
+	else if( option=='s') movep1 += 10;
+	else if( option=='a') movep1 -= 1;
+	else if( option=='d') movep1 += 1;
+	}
+	else{
+	who=2;
+	if( option=='w') movep2 -= 10;
+	else if( option=='s') movep2 += 10;
+	else if( option=='a') movep2 -= 1;
+	else if( option=='d') movep2 += 1;
+	}
+	}
+
 	/////////////////////////////////////
 	if( option=='w') lastmove -= 10;
 	else if( option=='s') lastmove += 10;
@@ -367,17 +370,17 @@ int cc,next,jojo = 3;
 }
 
 void setmap(){
-    
+	if(setlevel == 0) setlevel=1;
 	for (int i = 0; i < 50; i++)
 	{
-		set[i]=LV1[i];
+		if(setlevel == 1) set[i]=LV1[i];
+		if(setlevel == 2) set[i]=LV2[i];
+		if(setlevel == 3) set[i]=LV3[i];
+		if(setlevel == 4) set[i]=LV4[i];
+		if(setlevel == 5) set[i]=LV5[i];
+		if(setlevel == 6) set[i]=LV6[i];
 	}
 	walkPY();
-
-
-	
-	
-
 }
 void Howtoplay(){
     do{
@@ -400,8 +403,8 @@ void checkmap(int lastmove,int who){
     movep1 -= lastmove;
     } 
     else{
-        p2turn=1;
-        p1turn=0;
+        if(Turn == 'F') Turn = 'S';
+		if(Turn == 'S') Turn = 'F';
         set[movep1]=4;
         set[movep1-lastmove]=2;
         }
@@ -411,12 +414,25 @@ void checkmap(int lastmove,int who){
     movep2 -= lastmove;
     } 
     else{
-        p2turn=0;
-        p1turn=1;
+        if(Turn == 'F') Turn = 'S';
+		if(Turn == 'S') Turn = 'F';
 	    set[movep2]=5;
         set[movep2-lastmove]=2;
     }
     }
+
+	//เมื่อmovep1เก็บ*แล้วให้เกิดevenบางอย่างเพื่อเช็คว่ามันสามารถเก็บ*ได้หรือยัง
+	int cc,next,jojo = 3;
+	for(cc = 0;cc<50;cc++){
+		if(jojo == LV1[cc]){
+		int next = cc;
+		
+		if (movep1 == next){
+		setlevel +=1;
+		setmap();
+		} 
+		}	
+	} 
 }
 void time(){
 int sec = 30;
