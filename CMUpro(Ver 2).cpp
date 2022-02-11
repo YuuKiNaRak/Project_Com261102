@@ -6,6 +6,7 @@
 #include<fstream>
 #include <time.h> 
 
+
 #define STD_OUTPUT_HANDLE ((DWORD)-11)
 
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
