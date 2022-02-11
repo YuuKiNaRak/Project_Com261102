@@ -335,6 +335,7 @@ bool walkPY(){
 	else if( option=='a') movep2 -= 1;
 	else if( option=='d') movep2 += 1;
 	}
+		
 	}
 
 	if(Turn == 'F'){
