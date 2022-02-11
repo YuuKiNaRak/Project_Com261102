@@ -43,7 +43,7 @@ char mapset1[10][60] = {
 "_ _ _ # _ _ # _ _ #"};
 char mapset2[10][60] = {
 "_ _ _ * # _ # _ _ _",  
-"_ # # _ # _ _ _ # _",    
+"_ # # _ _ _ _ _ # _",    
 "_ # # _ # _ # _ # _",  
 "_ _ _ # _ # * _ # #",    
 //"_ _ _ _ _ _ _ _ # #",
@@ -646,11 +646,11 @@ void gamestart(){
      play1.pts = 0;
      play2.pts = 0;
     if(maptemp==1) maxpts = 2;
-    if(maptemp==2) maxpts = 3;
-    if(maptemp==3) maxpts = 3;
-    if(maptemp==4) maxpts = 4;
-    if(maptemp==5) maxpts = 5;
-        
+    if(maptemp==2) maxpts = 2;
+    if(maptemp==3) maxpts = 2;
+    if(maptemp==4) maxpts = 2;
+    if(maptemp==5) maxpts = 2;
+
     for(int r=0;r<10;r++){
         for(int c=0;c<60;c++){
     if(maptemp==1) map[r][c] = mapset1[r][c];
@@ -674,6 +674,8 @@ void gamestart(){
      Sleep(100);
     while(game_runner == true){
     system("cls");
+    gotoxy(51,3);
+    cout << " |  Level " << maptemp << "  | \n"; 
         for(int dp=0;dp<10;dp++){
             space(50,dp+5);
             cout << map[dp] << endl;
@@ -710,7 +712,6 @@ void gamestart(){
             p2();
     }
     }
-
 
 void menu(){
 do{
@@ -856,6 +857,7 @@ void role(){
 	cout << "Press any key to START";
 	char option = getche();
     gamestart();
+    
 }
 /* 
 -เดินกิน -> 
