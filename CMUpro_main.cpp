@@ -510,63 +510,63 @@ void Howtoplay(){
 	int len = 0,x;
     string text;
 	len = text.length();
-	text = "\n----------------\n";
+	space(52,5); text = "---------------- \n";
     len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-	text = "|   How to play  |";
+	space(52,6); text = "|   How to play | \n ";
     len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-	text = "\n----------------";
+	space(52,7); text = "---------------- \n ";
     len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-	text = "\n use W A S D to move";
+	space(50,9); text = "use W A S D to move \n ";
     len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-	text = "\n\n Press 'w' to move up";
+	space(50,10); text = "Press 'w' to move up \n ";
     len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-	text = "\n Press 's' to move down";
+	space(50,11); text = "Press 's' to move down \n";
     len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-	text = "\n Press 'a' to move left";
+	space(50,12); text = "Press 'a' to move left \n";
     len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-	text = "\n Press 'd' to move right";
+	space(50,13); text = "Press 'd' to move right \n";
     len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-	text = "\n\nPress any key to go back to menu";
+	space(50,15); text = "Press any key to go back to menu \n";
     len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15;
@@ -587,7 +587,7 @@ void gameover(){
 	len = text.length();
 	cout<<endl;
 
-	text = "\t\t--------------------------\n";
+	space(50,5); text = "\t\t--------------------------\n";
     len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15+1;
@@ -595,7 +595,7 @@ void gameover(){
 		cout << text[x];	
     }
 
-	text = "\t\t-------- Game Over -------\n";
+	space(50,6); text = "\t\t-------- Game Over -------\n";
     len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15+1;
@@ -603,7 +603,7 @@ void gameover(){
 		cout << text[x];	
     }
 
-	text = "\t\t--------------------------\n\n";
+	space(50,7); text = "\t\t--------------------------\n\n";
     len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15+1;
@@ -611,7 +611,7 @@ void gameover(){
 		cout << text[x];	
     }
 
-	text = "\t\t survival you are very noob\n";
+	space(50,9); text = "\t\t survival you are very noob\n";
     len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15+1;
@@ -619,7 +619,7 @@ void gameover(){
 		cout << text[x];	
     }
 
-	text = "\t\t Go away Now!\n";
+	space(50,10); text = "\t\t Go away Now!\n";
     len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15+1;
@@ -627,7 +627,7 @@ void gameover(){
 		cout << text[x];	
     }
 
-	text = "\t\tPress any key to go back to menu.";
+	space(50,12); text = "\t\tPress any key to go back to menu.";
     len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%15+1;
