@@ -3,8 +3,9 @@
 #include <string>
 #include "windows.h"
 #include <dos.h>
-#include <fstream>
+#include<fstream>
 #include <time.h> 
+#include <stdlib.h>
 
 
 using namespace std;
@@ -39,16 +40,16 @@ void loadingscreen(){
 }
 void overscreen(){
     for(int i=0;i<12;i++){
-      gotoxy(47,5+i);
+      gotoxy(45,5+i);
               for(int c=0;c<6;c++){
-				cout << "\2\2\2\2\2"; 
+				cout << "\2\2\2\2\2\2"; 
                 Sleep(1);
               }
               cout<<endl;
     }
     for(int i=0;i<12;i++){
-      gotoxy(47,5+i);
-     cout <<"                              ";			
+      gotoxy(45,5+i);
+     cout <<"                                    ";			
      Sleep(50);
      cout<<endl;
     }
@@ -125,6 +126,7 @@ void Howtoplay(){
 		cout << text[x];	
     }
 	getche();
+	overscreen();
 }
 void p1winassur(){
       int randomcolor;
