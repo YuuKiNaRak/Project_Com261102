@@ -1,17 +1,5 @@
-#include <iostream>
-#include <conio.h>
-#include <string>
-#include "windows.h"
-#include <dos.h>
-#include<fstream>
-#include <time.h> 
-
+#include"touchup.h"
 #define STD_OUTPUT_HANDLE ((DWORD)-11)
-
-HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
-COORD CursorPosition;
-HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-
 
 using namespace std;
 class point{
@@ -21,50 +9,50 @@ public:
 void p1();
 void p2();
 void gamestart();
-void Howtoplay();
 void gameover();
 void menu();
 void role();
 void nextmap();
-void gotoxy( short x, short y ){
-    COORD pos{x,y};
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),pos);
-  }
-void space(int x, int y){
-	CursorPosition.X = x;
-	CursorPosition.Y = y;
-	SetConsoleCursorPosition(console, CursorPosition);
-}
+
 char mapset1[10][60] = {
-"# _ 1 # # # _ * # #",  
+"# _ _ _ _ _ _ _ _ _",  
+"_ # _ _ \3 \3 _ _ _ #",    
+"_ _ # _ _ # _ _ # #",  
+"1 _ _ # _ # \3 _ # #",    
+"2 _ _ # _ _ # _ _ #",
+"_ \4 _ # # # _ \3 # #",  
+"_ _ _ _ \3 _ _ _ _ #",    
+"\4 _ _ _ _ # _ _ # #",  
+"_ # \4 # _ # \3 _ # #",    
+"_ _ _ _ _ _ #  _ #"};
+char mapset2[10][60] = {
+"# _ 1 # # # _ \3 # #",  
 "_ # _ _ _ _ _ _ _ #",    
 "_ _ _ _ _ # _ _ # #",  
-"_ 2 _ # _ # * _ # #",    
+"_ 2 _ # _ # \3 _ # #",    
 "_ _ _ # _ _ # _ _ #"};
-char mapset2[10][60] = {
-"_ _ _ * # _ # _ _ _",  
-"_ # # _ _ _ _ _ # _",    
-"_ # # _ # _ # _ # _",  
-"_ _ _ # _ # * _ # #",    
-//"_ _ _ _ _ _ _ _ # #",
-"1 # * # _ # # _ _ 2"};
 char mapset3[10][60] = {
-"1 _ # * # _ _ _ _ _",  
-"_ _ _ _ _ _ # _ # _",    
-"_ # _ # _ # _ _ # _",  
+"1 _ # \3 # _ _ _ _ _ _ # \3 # _ _ _ _ _",  
+"_ _ _ _ _ _ # _ # _ _ _ _ _ _ _ # _ # _",    
+"_ # _ # _ # _ _ # _ _ # _ # _ # _ _ # _",  
 "_ # _ # _ # _ _ # _",    
-"# * _ _ _ _ * _ # 2"};
+"# \3 _ _ _ _ \3 _ # 2"};
 char mapset4[10][60] = {
-"F O _ # # # _ * # #",  
-"_ @ _ _ @ 2 _ _ _ #",    
-"_ _ @ _ _ # _ _ # #",  
-"_ _ _ # _ # * _ # #",    
-"_ _ _ # _ _ # _ 1 #"};
+"# _ _ _ 1 _ _ # _ _ _ # _ _ _",
+"_ _ # _ _ _ _ # _ _ _ # _ _ _",
+"_ _ # _ _ _ _ # _ _ _ \3 _ _ _",
+"_ _ _ # \3 # _ # _ _ _ _ # _ _",
+"_ _ _ # \4 # _ \4 _ _ _ _ # _ _",
+"_ _ _ # _ _ \4 _ \4 _ _ _ 2 _ \4",
+"_ _ _ # _ # # # _ _ _ _ # _ _",
+"_ _ \3 \4 _ _ _ \4 _ _ _ _ _ _ _",
+"_ _ _ _ # _ _ # _ _ _ _ _ _ _",
+"_ _ _ _ _ _ _ # _ _ _ # \3 _ #"};
 char mapset5[10][60] = {
-"F I _ # # # _ * # #",  
+"F I _ # # # _ \3 # #",  
 "_ @ _ _ @ 2 _ _ _ #",    
 "_ _ @ _ _ # _ _ # #",  
-"_ _ _ # _ # * _ # #",    
+"_ _ _ # _ # \3 _ # #",    
 "_ _ _ # _ _ # _ 1 #"};
 char map[10][60];
 int x,y,i,j;
@@ -75,14 +63,18 @@ bool game_runner = false;
 point play1;
 point play2;
 int maxpts;
-int maptemp=1;
-
+int maptemp=1;//เลเวลด่าน
+int yspace;//สำหรับแมพยาว
+int xspace;//สำหรับแมพกว้าง
+int wintype=0;//ใครชนะในroleไหน
 int main(){
 srand(time(0));
+opening();
 menu();
-return 0; 
+exit; 
 }
 void p1(){
+    //condition สำหรับ P1 เมื่อเป็น Sur
       if(turn==1&&P1==1){
         if(GetAsyncKeyState(0x53)){
             int yc = y+1;
@@ -91,7 +83,7 @@ void p1(){
                 y++;
                 map[y][x] = '1';
                 turn=2;
-            }if(map[yc][x] == '*'){
+            }if(map[yc][x] == '\3'){
                 map[y][x] = '_';
                 y++; 
                 map[y][x] = '1';
@@ -103,13 +95,21 @@ void p1(){
                 map[y][x] = '1';
                 map[y+1][x] = '@';
                 turn=2;
+            }if(map[yc][x] == '\4'&&map[yc+1][x] == '_'){
+                map[y][x] = '_';
+                y++;
+                map[y][x] = '@';
+                y++;
+                map[y][x] = '1';
+                turn=2;
             }
             if(map[yc][x] == ' ' or map[yc][x] == '#')turn=1;
-			if(map[yc][x] == '2'){
-				map[yc][x] == '1';
-				gameover();
+            if(map[yc][x] == '2'){
+                wintype=4;
+			    map[y][x] = 'X';
+                Sleep(500);
+                gameover();
 			}
-
             Sleep(200);
             return;
         }
@@ -121,7 +121,7 @@ void p1(){
                 map[y][x] = '1';
                 turn=2;
 
-            }if(map[yc][x] == '*'){
+            }if(map[yc][x] == '\3'){
                 map[y][x] = '_'; 
                 y--;
                 map[y][x] = '1';
@@ -133,12 +133,22 @@ void p1(){
                 map[y][x] = '1';
                 map[y-1][x] = '@';
                 turn=2;
+            }if(map[yc][x] == '\4'&&map[yc-1][x] == '_'){
+                map[y][x] = '_';
+                y--;
+                map[y][x] = '@';
+                y--;
+                map[y][x] = '1';
+                turn=2;
             }
-            if(map[yc][x] == ' ' or map[yc][x] == '#')turn=1;
-			if(map[yc][x] == '2'){
-				map[yc][x] == '1';
+
+            if(map[yc][x] == '2'){
+                wintype=4;
+			    map[y][x] = 'X';
+                Sleep(500);
 				gameover();
 			}
+            if(map[yc][x] == ' ' or map[yc][x] == '#')turn=1;
             Sleep(200);
             return;
         }
@@ -149,7 +159,7 @@ void p1(){
                 x+=2;
                 map[y][x] = '1';
                 turn=2;
-            }if(map[y][xc] == '*'){
+            }if(map[y][xc] == '\3'){
                 map[y][x] = '_';
                 x+=2;
                 map[y][x] = '1';
@@ -161,11 +171,20 @@ void p1(){
                 map[y][x] = '1';
                 map[y][x+2] = '@';
                 turn=2;
-
+            }if(map[y][xc] == '\4'&&map[y][xc+2] == '_'){
+                map[y][x] = '_';
+                x+=2;
+                map[y][x] = '@';
+                x+=2;
+                map[y][x] = '1';
+                turn=2;
             }
+
             if(map[y][xc] == ' ' or map[y][xc] == '#')turn=1;
 			if(map[y][xc] == '2'){
-				map[y][xc] == '1';
+                wintype=4;
+			    map[y][x] = 'X';
+                Sleep(500);
 				gameover();
 			}
             Sleep(200);
@@ -178,7 +197,7 @@ void p1(){
                 x-=2;
                 map[y][x] = '1';
                 turn=2;
-                }if(map[y][xc] == '*'){
+                }if(map[y][xc] == '\3'){
                 map[y][x] = '_'; 
                 x-=2;
                 map[y][x] = '1';
@@ -191,16 +210,26 @@ void p1(){
                 map[y][x-2] = '@';
                 turn=2;
 
+            }if(map[y][xc] == '\4'&&map[y][xc-2] == '_'){
+                map[y][x] = '_';
+                x-=2;
+                map[y][x] = '@';
+                x-=2;
+                map[y][x] = '1';
+                turn=2;
             }
             if(map[y][xc] == ' ' or map[y][xc] == '#')turn=1;
 			if(map[y][xc] == '2'){
-				map[y][xc] == '1';
+                wintype=4;
+			    map[y][x] = 'X';
+                Sleep(500);
 				gameover();
 			}
             Sleep(200);
             return;
         }
     }
+     //condition สำหรับ P1 เมื่อเป็น Fin
     if(turn==1&&P1==2){
         if(GetAsyncKeyState(0x53)){
             int yc = y+1;
@@ -215,10 +244,19 @@ void p1(){
                 map[y][x] = '1';
                 map[y+1][x] = '@';
                 turn=2;
+            }if(map[yc][x] == '\4'&&map[yc+1][x] == '_'){
+                map[y][x] = '_';
+                y++;
+                map[y][x] = '@';
+                y++;
+                map[y][x] = '1';
+                turn=2;
             }
             if(map[yc][x] == ' ' or map[yc][x] == '#')turn=1;
 			if(map[yc][x] == '2'){
-				map[yc][x] == '1';
+                wintype=3;
+				map[yc][x] = 'X';
+                Sleep(500);
 				gameover();
 			}
             Sleep(200);
@@ -237,10 +275,19 @@ void p1(){
                 map[y][x] = '1';
                 map[y-1][x] = '@';
                 turn=2;
+            }if(map[yc][x] == '\4'&&map[yc-1][x] == '_'){
+                map[y][x] = '_';
+                y--;
+                map[y][x] = '@';
+                y--;
+                map[y][x] = '1';
+                turn=2;
             }
             if(map[yc][x] == ' ' or map[yc][x] == '#')turn=1;
 			if(map[yc][x] == '2'){
-				map[yc][x] == '1';
+			    map[yc][x] = 'X';
+                wintype=3;
+                Sleep(500);
 				gameover();
 			}
             Sleep(200);
@@ -259,10 +306,19 @@ void p1(){
                 map[y][x] = '1';
                 map[y][x+2] = '@';
                 turn=2;
+            }if(map[y][xc] == '\4'&&map[y][xc+2] == '_'){
+                map[y][x] = '_';
+                x+=2;
+                map[y][x] = '@';
+                x+=2;
+                map[y][x] = '1';
+                turn=2;
             }
             if(map[y][xc] == ' ' or map[y][xc] == '#')turn=1;
 			if(map[y][xc] == '2'){
-				map[y][xc] == '1';
+				map[y][xc] = 'X';
+                wintype=3;
+                Sleep(500);
 				gameover();
 			}
             Sleep(200);
@@ -281,10 +337,19 @@ void p1(){
                 map[y][x] = '1';
                 map[y][x-2] = '@';
                 turn=2;
+            }if(map[y][xc] == '\4'&&map[y][xc-2] == '_'){
+                map[y][x] = '_';
+                x-=2;
+                map[y][x] = '@';
+                x-=2;
+                map[y][x] = '1';
+                turn=2;
             }
             if(map[y][xc] == ' ' or map[y][xc] == '#')turn=1;
 			if(map[y][xc] == '2'){
-				map[y][xc] == '1';
+				map[y][xc] = 'X';
+                wintype=3;
+                Sleep(500);
 				gameover();
 			}
             Sleep(200);
@@ -293,6 +358,7 @@ void p1(){
     }
 }
 void p2(){
+//condition สำหรับ P2 เมื่อเป็น Sur
 if(turn==2&&P2==1){
         if(GetAsyncKeyState(0x53)){
             int jc = j+1;
@@ -301,7 +367,7 @@ if(turn==2&&P2==1){
                 j++;
                 map[j][i] = '2';
                 turn=1;
-            }if(map[jc][i] == '*'){
+            }if(map[jc][i] == '\3'){
                 map[j][i] = '_'; 
                 j++;
                 map[j][i] = '2';
@@ -313,10 +379,20 @@ if(turn==2&&P2==1){
                 map[j][i] = '2';
                 map[j+1][i] = '@';
                 turn=1;
+            }if(map[jc][i] == '\4'&&map[jc+1][i] == '_'){
+                map[j][i] = '_';
+                j++;
+                map[j][i] = '@';
+                j++;
+                map[j][i] = '2';
+                turn=1;
             }
+
             if(map[jc][i] == ' ' or map[jc][i] == '#')turn=2;
 			if(map[jc][i] == '1' ){
-				map[jc][i] == '2';
+                wintype=3;
+				map[j][i] = 'X';
+                Sleep(500);
 				gameover();
 			}
             Sleep(200);
@@ -329,7 +405,7 @@ if(turn==2&&P2==1){
                 j--;
                 map[j][i] = '2';
                 turn=1;
-            }if(map[jc][i] == '*'){
+            }if(map[jc][i] == '\3'){
                 map[j][i] = '_';
                 j--;
                 map[j][i] = '2'; 
@@ -341,12 +417,20 @@ if(turn==2&&P2==1){
                 map[j][i] = '2';
                 map[j-1][i] = '@';
                 turn=1;
+            }if(map[jc][i] == '\4'&&map[jc-1][i] == '_'){
+                map[j][i] = '_';
+                j--;
+                map[j][i] = '@';
+                j--;
+                map[j][i] = '2';
+                turn=1;
             }
             if(map[jc][i] == ' ' or map[jc][i] == '#')turn=2;
 			if(map[jc][i] == '1' ){
-				map[jc][i] == '2';
+                wintype=3;
+			    map[j][i] = 'X';
+                Sleep(500);
 				gameover();
-				
 			}
             Sleep(200);
             return;
@@ -359,7 +443,7 @@ if(turn==2&&P2==1){
                 map[j][i] = '2';
                 turn=1;
             }
-            if(map[j][ic] == '*'){
+            if(map[j][ic] == '\3'){
                 map[j][i] = '_'; 
                 i+=2;
                 map[j][i] = '2';
@@ -371,10 +455,19 @@ if(turn==2&&P2==1){
                 map[j][i] = '2';
                 map[j][i+2] = '@';
                 turn=1;
+            }if(map[j][ic] == '\4'&&map[j][ic+2] == '_'){
+                map[j][i] = '_';
+                i+=2;
+                map[j][i] = '@';
+                i+=2;
+                map[j][i] = '2';
+                turn=1;
             }
             if(map[j][ic] == ' ' or map[j][ic] == '#')turn=2;
 			if(map[j][ic] == '1' ){
-				map[j][ic] == '2';
+                wintype=3;
+			    map[j][i] = 'X';
+                Sleep(500);
 				gameover();
 			}
             Sleep(200);
@@ -387,7 +480,7 @@ if(turn==2&&P2==1){
                 i-=2;
                 map[j][i] = '2';
                 turn=1;
-            }if(map[j][ic] == '*'){
+            }if(map[j][ic] == '\3'){
                 map[j][i] = '_'; 
                 i-=2;
                 map[j][i] = '2';
@@ -399,10 +492,19 @@ if(turn==2&&P2==1){
                 map[j][i] = '2';
                 map[j][i-2] = '@';
                 turn=1;
+            }if(map[j][ic] == '\4'&&map[j][ic-2] == '_'){
+                map[j][i] = '_';
+                i-=2;
+                map[j][i] = '@';
+                i-=2;
+                map[j][i] = '2';
+                turn=1;
             }
             if(map[j][ic] == ' ' or map[j][i] == '#')turn=2;
 			if(map[j][ic] == '1' ){
-				map[j][ic] == '2';
+                wintype=3;
+			    map[j][i] = 'X';
+                Sleep(500);
 				gameover();
 			}
             Sleep(200);
@@ -410,6 +512,7 @@ if(turn==2&&P2==1){
         }
     
     }
+//condition สำหรับ P2 เมื่อเป็น Fin
 if(turn==2&&P2==2){
         if(GetAsyncKeyState(0x53)){
             int jc = j+1;
@@ -424,10 +527,19 @@ if(turn==2&&P2==2){
                 map[j][i] = '2';
                 map[j+1][i] = '@';
                 turn=1;
+            }if(map[jc][i] == '\4'&&map[jc+1][i] == '_'){
+                map[j][i] = '_';
+                j++;
+                map[j][i] = '@';
+                j++;
+                map[j][i] = '2';
+                turn=1;
             }
             if(map[jc][i] == ' ' or map[jc][i] == '#')turn=2;
 			if(map[jc][i] == '1' ){
-				map[jc][i] == '2';
+                wintype=4;
+			    map[jc][i] = 'X';
+                Sleep(500);
 				gameover();
 			}
             Sleep(200);
@@ -446,10 +558,19 @@ if(turn==2&&P2==2){
                 map[j][i] = '2';
                 map[j-1][i] = '@';
                 turn=1;
+            }if(map[jc][i] == '\4'&&map[jc-1][i] == '_'){
+                map[j][i] = '_';
+                j--;
+                map[j][i] = '@';
+                j--;
+                map[j][i] = '2';
+                turn=1;
             }
             if(map[jc][i] == ' ' or map[jc][i] == '#')turn=2;
 			if(map[jc][i] == '1' ){
-				map[jc][i] == '2';
+                wintype=4;
+			    map[j][i] = 'X';
+                Sleep(500);
 				gameover();
 			}
             Sleep(200);
@@ -468,10 +589,19 @@ if(turn==2&&P2==2){
                 map[j][i] = '2';
                 map[j][i+2] = '@';
                 turn=1;
+            }if(map[j][ic] == '\4'&&map[j][ic+2] == '_'){
+                map[j][i] = '_';
+                i+=2;
+                map[j][i] = '@';
+                i+=2;
+                map[j][i] = '2';
+                turn=1;
             }
             if(map[j][ic] == ' ' or map[j][ic] == '#')turn=2;
 			if(map[j][ic] == '1' ){
-				map[j][ic] == '2';
+                wintype=4;
+			    map[j][ic] = 'X';
+                Sleep(500);
 				gameover();
 			}
             Sleep(200);
@@ -490,167 +620,87 @@ if(turn==2&&P2==2){
                 map[j][i] = '2';
                 map[j][i-2] = '@';
                 turn=1;
+            }if(map[j][ic] == '\4'&&map[j][ic-2] == '_'){
+                map[j][i] = '_';
+                i-=2;
+                map[j][i] = '@';
+                i-=2;
+                map[j][i] = '2';
+                turn=1;
             }
             if(map[j][ic] == ' ' or map[j][ic] == '#')turn=2;
 			if(map[j][ic] == '1' ){
-				map[j][ic] == '2';
+                wintype=4;
+			    map[j][ic] = 'X';
+                Sleep(500);
 				gameover();
-			}
+			}   
             Sleep(200);
             return;
         }
     
     }
     }
-void Howtoplay(){
-	system("cls");
-    int randomcolor;
-	srand(time(0));
-	int a[randomcolor] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
-	int len = 0,x;
-    string text;
-	len = text.length();
-	space(52,5); text = "---------------- \n";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%7+9;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-	space(52,6); text = "|   How to play | \n ";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%7+9;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-	space(52,7); text = "---------------- \n ";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%7+9;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-	space(50,9); text = "use W A S D to move \n ";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%7+9;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-	space(50,10); text = "Press 'w' to move up \n ";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%7+9;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-	space(50,11); text = "Press 's' to move down \n";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%7+9;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-	space(50,12); text = "Press 'a' to move left \n";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%7+9;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-	space(50,13); text = "Press 'd' to move right \n";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%7+9;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-	space(50,15); text = "Press any key to go back to menu \n";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%7+9;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-	getch();
-}
-
-void gameover(){
+// gameover screen
+void gameover(){  
     system("cls");
-
-    int randomcolor;
-	srand(time(0));
-	int a[randomcolor] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
-	int len = 0,x;
-    string text;
-	len = text.length();
-	cout<<endl;
-
-	space(50,5); text = "\t\t--------------------------\n";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%7+9;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
+    if(wintype==1) {
+        overscreen();
+        Sleep(100);
+        p1winassur();
     }
-
-	space(50,6); text = "\t\t-------- Game Over -------\n";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%7+9;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
+    if(wintype==2) {
+        overscreen();
+        Sleep(100);
+        p1winassur();
     }
-
-	space(50,7); text = "\t\t--------------------------\n\n";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%7+9;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-
-	space(50,9); text = "\t\t survival you are very noob\n";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%7+9;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-
-	space(50,10); text = "\t\t Go away Now!\n";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%7+9;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
-    }
-
-	space(50,12); text = "\t\tPress any key to go back to menu.";
-    len = text.length();
-	for(x=0;x<len;x++){
-	    randomcolor = rand()%7+9;
-		SetConsoleTextAttribute(h,randomcolor);
-		cout << text[x];	
+    if(wintype==3){
+    overscreen();
+    Sleep(100);
+     p1winasfin();   
+    } 
+    if(wintype==4) {
+        overscreen();
+        Sleep(100);
+        p2winasfin();
     }
 	getch();
     P1=0;
     P2=0;turn = 0;
-	menu();
+    maptemp=1;
+    game_runner=false;
+    overscreen();
+    exit;
 	}
-
-
 void gamestart(){
     game_runner = true;
      play1.pts = 0;
      play2.pts = 0;
-    if(maptemp==1) maxpts = 2;
-    if(maptemp==2) maxpts = 2;
-    if(maptemp==3) maxpts = 2;
-    if(maptemp==4) maxpts = 2;
-    if(maptemp==5) maxpts = 2;
-
+    if(maptemp==1){
+        maxpts = 2;
+        yspace=5;
+        xspace=0;
+    } 
+      if(maptemp==2){
+        maxpts = 2;
+        yspace=0;
+        xspace=0;
+    } 
+      if(maptemp==3){
+        maxpts = 2;
+        yspace=0;
+        xspace=10;
+    } 
+      if(maptemp==4){
+        maxpts = 2;
+    } 
+      if(maptemp==5){
+        maxpts = 2;
+    } if(maptemp==6){
+        if(P1==1) wintype=1;
+        if(P2==1) wintype=2;
+        gameover();
+    }
     for(int r=0;r<10;r++){
         for(int c=0;c<60;c++){
     if(maptemp==1) map[r][c] = mapset1[r][c];
@@ -674,29 +724,29 @@ void gamestart(){
      Sleep(100);
     while(game_runner == true){
     system("cls");
-    gotoxy(51,3);
+    gotoxy(52,3);
     cout << " |  Level " << maptemp << "  | \n"; 
         for(int dp=0;dp<10;dp++){
-            space(50,dp+5);
-            cout << map[dp] << endl;
+            space(50-xspace,5+dp);
+            cout << map[dp]<< endl;
         }
-    gotoxy(45,10); 
+    gotoxy(45,10+yspace); 
     cout<<" -------------------------- \n";
-    if(turn==1){gotoxy(45,11); 
-                cout << " |  Use WASD to move P1  | \n"; }
-    else {gotoxy(45,11);  
-    cout << " |  Use WASD to move P2  | \n"; }
-    gotoxy(45,12);
+    if(turn==1){gotoxy(45,11+yspace); 
+                cout << " |  Use WASD to move P1   | \n"; }
+    else {gotoxy(45,11+yspace);  
+    cout << " |  Use WASD to move P2   | \n"; }
+    gotoxy(45,12+yspace);
     if(turn==1&&P1==1) {
-        cout << " |    Your score is "<<play1.pts<<"/"<<maxpts<<"  | \n";
-        gotoxy(45,13); 
+        cout << " |    Your score is "<<play1.pts<<"/"<<maxpts<<"   | \n";
+        gotoxy(45,13+yspace); 
         cout<<" -------------------------- \n"; }
     else if(turn==2&&P2==1) {
-        cout << " |    Your score is "<<play2.pts<<"/"<<maxpts<<"  | \n";
-        gotoxy(45,13); 
+        cout << " |    Your score is "<<play2.pts<<"/"<<maxpts<<"   | \n";
+        gotoxy(45,13+yspace); 
         cout<<" -------------------------- \n";}
     else {
-    gotoxy(45,12); 
+    gotoxy(45,12+yspace); 
     cout<<" -------------------------- \n";
     }
     if(P1==1&&play1.pts==maxpts){
@@ -773,8 +823,16 @@ len = text.length();
 		cout << text[x];	
     }
     char option = getche();
-    if( option=='1') role();
-    else if( option=='2') Howtoplay(); 
+    if( option=='1') {
+        loadingscreen();
+        Sleep(10);
+        role();
+    }
+    else if( option=='2') {
+        loadingscreen();
+        Sleep(10);
+        Howtoplay();
+    }
     else if ( option=='3') {
         system("cls");
         return; }
@@ -837,33 +895,43 @@ void role(){
 	    randomcolor = rand()%7+9;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
-        SetConsoleTextAttribute(h,6);
     }
         char option = getche();
         if( option=='1') P1=1;
         else if( option=='2') P1=2;
-        else if( option=='3') menu();
+        else if( option=='3') {
+            loadingscreen();
+            Sleep(100);
+            return;
+        }
     }
-    system("cls");
-	space(50,5); cout << " -------------------------- \n"; 
-	space(50,6); if(P1 == 1)cout << " |   P2 role is Finder  |\n";
-	else cout << " |   P2 role is Survival|\n"; 
-	space(50,7); cout<<" --------------------------\n";
+    loadingscreen();
+    SetConsoleTextAttribute(h,11);
+	space(50,5); cout << " -------------------------\n"; 
+	space(50,6); 
+    if(P1 == 1)cout << " |   P2 role is Finder   |\n";
+	else {cout << " |  P2 role is Survival  |\n";} 
+	space(50,7); cout<<" -------------------------\n";
+    SetConsoleTextAttribute(h,12);
+    space(52,8); cout << "_ : A path you can walk";
+    space(52,9); cout << "# : A wall";
+    space(52,10); cout << "@ : A pushable block";
+    space(52,11); cout << "\4 : A skipblock";
+    space(52,12); cout << "\3 : A key fragment";
     if( P1 ==1) P2=2;
 	else if( P1 ==2) P2=1;
 
 	if( P1 ==1) turn =1;
 	else if( P2 == 1 ) turn=2;
-    space(52,8);
+    space(52,14);
+    SetConsoleTextAttribute(h,14);
 	cout << "Press any key to START";
 	char option = getche();
-    
+    loadingscreen();
+    Sleep(100);
     gamestart();
-    
 }
 /* 
--เดินกิน -> 
--func เปลี่ยนด่าน
 หลัง11
 -item
 -นับก้าว 
