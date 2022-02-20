@@ -8,10 +8,10 @@
 >Nuttadon นัทดล ปุญญพันธุ์ ใหม่ (Present)(Tester)
 
 To do list:
-    1.เพิ่ม condition turn ให้ sur.
-    2.เพิ่มfunc จับให้ fin.
-    3.เพิ่ม condition ให้ sur สามารถสวนกับ fin. ได้
+    1.เพิ่ม condition turn ให้ sur. NOPE TOO MUCH STRESS
+    2.เพิ่มfunc จับให้ fin. YEP
+    3.เพิ่ม condition ให้ sur สามารถสวนกับ fin. ได้ NOPE NOT FUN
      //ถ้าด้านหน้า fin เป็น sur แล้วด้านหลังเป็นกำแพง/สิ่งของ sur สามารถบีบ fin ให้ชนกำแพงได้ 
-    4.เพิ่มข้อความแสดงเมื่อเปลี่ยนด่าน
-    5.เพิ่มข้อความแสดงเมื่อแพ้/ชนะ
+    4.เพิ่มข้อความแสดงเมื่อเปลี่ยนด่าน CHANGE TO TRANSITION
+    5.เพิ่มข้อความแสดงเมื่อแพ้/ชนะ YEP
     
