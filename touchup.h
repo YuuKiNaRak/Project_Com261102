@@ -320,6 +320,7 @@ void p2winasfin(){
     }
 }
 void opening(){
+	system("CLS");
 	int randomcolor = rand()%7+9;
 	SetConsoleTextAttribute(h,randomcolor);
 	gotoxy(40,5);
