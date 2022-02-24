@@ -1,6 +1,6 @@
 #include"touchup.h"
 #define STD_OUTPUT_HANDLE ((DWORD)-11)
-
+//ทดลองใช้class
 using namespace std;
 class point{
 public:
@@ -13,7 +13,7 @@ void gameover();
 void menu();
 void role();
 void nextmap();
-
+//เพิ่ม/สร้างแมพ
 char mapset1[10][60] = {
 "_ _ _ \3 # _ # _ _ 2",  
 "_ # # _ _ _ _ _ # _",    
@@ -63,20 +63,27 @@ char mapset5[10][60] = {
 "_ _ # _ # _ _ _ \4 _ _ _ # _ # _ _",
 "_ \4 _ # # # # _ _ _ # # # # _ \3 \4",
 "\3 _ _ _ _ _ _ _ \4 _ _ _ _ _ _ \4 2"};
-
+//เอาไว้เก็บเเมพที่ดึงมาใช้
 char map[10][60];
+//บันทึกค่าของ P1 และ P2
 int x,y,i,j;
-int times=60;
-//spawnpoint
-int turn=0,P1=0,P2=0;//determide turn and role 1=sur 2=finder
+//กำหนด turn และ role โดยที่ 1=sur 2=finder
+int turn=0,P1=0,P2=0;
+//ตั้งค่าการ run แมพ
 bool game_runner = false;
 point play1;
 point play2;
+//กำหนด obj แต่ละด่าน
 int maxpts;
-int maptemp=1;//เลเวลด่าน
-int yspace;//สำหรับแมพยาว
-int xspace;//สำหรับแมพกว้าง
-int wintype=0;//ใครชนะในroleไหน
+//เลเวลด่าน
+int maptemp=1;
+//แก้positionสำหรับแมพสูง
+int yspace;
+//แก้positionสำหรับแมพยาว
+int xspace;
+//ใครชนะในroleไหน
+int wintype=0;
+//ใช้ run menu ที่เป็น function เชื่อม/ทางผ่าน
 int main(){
 srand(time(0));
 opening();
@@ -86,6 +93,7 @@ exit;
 void p1(){
     //condition สำหรับ P1 เมื่อเป็น Sur
       if(turn==1&&P1==1){
+          //s key
         if(GetAsyncKeyState(0x53)){
             int yc = y+1;
             if(map[yc][x] == '_'){
@@ -123,6 +131,7 @@ void p1(){
             Sleep(200);
             return;
         }
+        //w key
         if(GetAsyncKeyState(0x57)){
             int yc = y-1;
             if(map[yc][x] == '_'){
@@ -162,6 +171,7 @@ void p1(){
             Sleep(200);
             return;
         }
+        //d key
         if(GetAsyncKeyState(0x44)){
             int xc = x+2;
             if(map[y][xc] == '_'){
@@ -200,6 +210,7 @@ void p1(){
             Sleep(200);
             return;
         }
+        //a key
         if(GetAsyncKeyState(0x41)){
             int xc = x-2;
             if(map[y][xc] == '_'){
@@ -694,6 +705,7 @@ if(turn==2&&P2==2){
 // gameover screen
 void gameover(){  
     system("cls");
+    //เมื่อจบเกมให้แสดงข้อความอะไร
     if(wintype==1) {
         overscreen();
         Sleep(100);
@@ -726,6 +738,7 @@ void gamestart(){
     game_runner = true;
      play1.pts = 0;
      play2.pts = 0;
+     //กำหนดเงื่อนไขและตำแหน่งของด่าน
     if(maptemp==1){
         maxpts = 2;
         yspace=1;
@@ -755,6 +768,7 @@ void gamestart(){
         if(P2==1) wintype=2;
         gameover();
     }
+    //วาดด่าน
     for(int r=0;r<10;r++){
         for(int c=0;c<60;c++){
     if(maptemp==1) map[r][c] = mapset1[r][c];
@@ -764,6 +778,7 @@ void gamestart(){
     if(maptemp==5) map[r][c] = mapset5[r][c];
     }
     }
+    //หาตำแหน่งplayer
     for(int r=0;r<10;r++){
         for(int c=0;c<60;c++){
             if(map[r][c]=='1') {
