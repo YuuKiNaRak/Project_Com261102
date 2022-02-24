@@ -83,35 +83,35 @@ void Howtoplay(){
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-	space(50,9); text = "use W A S D to move \n ";
+	space(50,9); text = "\2 Use W A S D to move \n ";
     len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%7+9;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-	space(50,10); text = "Press 'w' to move up \n ";
+	space(50,10); text = "\2 Survivor Condition :\n ";
     len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%7+9;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-	space(50,11); text = "Press 's' to move down \n";
+	space(48,11); text = "Can pickup '\3' and move '@' \n";
     len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%7+9;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-	space(50,12); text = "Press 'a' to move left \n";
+	space(50,12); text = "\2 Finder Condition : \n";
     len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%7+9;
 		SetConsoleTextAttribute(h,randomcolor);
 		cout << text[x];	
     }
-	space(50,13); text = "Press 'd' to move right \n";
+	space(48,13); text = "Can move '\3' and destroy '@' \n";
     len = text.length();
 	for(x=0;x<len;x++){
 	    randomcolor = rand()%7+9;
