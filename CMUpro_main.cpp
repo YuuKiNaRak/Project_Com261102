@@ -996,6 +996,10 @@ void role(){
     SetConsoleTextAttribute(h,14);
 	cout << "Press any key to START";
 	char option = getche();
+        if( option=='2') maptemp=2;
+        else if( option=='3') maptemp=3;
+        else if( option=='4') maptemp=4;
+        else if( option=='5') maptemp=5;
     loadingscreen();
     Sleep(100);
     gamestart();
