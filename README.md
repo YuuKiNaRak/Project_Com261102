@@ -1,5 +1,5 @@
 # Lost_Hope261102 
->Main executable file = CMUpro_Main.cpp
+>Main executable file = CMUpro_main.cpp
 
 640612086 YuuKiNaRak ณัฐชนน นันทศรี ซอล (CODER[prototype])(Tester)
 640612192 bewzunjo ศรัณย์ กิมานุวัฒน์ บิว    (CODER[กราฟฟิก,ตกแต่ง])(Tester) 
