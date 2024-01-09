@@ -1,5 +1,5 @@
 # Lost_Hope261102 
->ขอใส่ชื่อข้างล่างพร้อมชื่อAcc ทีเดี่ยวตอนดูจะได้รู้ว่าใคร
+>Main executable file = CMUpro_Main.cpp
 
 640612086 YuuKiNaRak ณัฐชนน นันทศรี ซอล (CODER[prototype])(Tester)
 640612192 bewzunjo ศรัณย์ กิมานุวัฒน์ บิว    (CODER[กราฟฟิก,ตกแต่ง])(Tester) 
